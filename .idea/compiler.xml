@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CA1-BH-G2" />
+        <module name="CA1" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CA1-BH-G2" options="-endorseddirs C:\Users\Renea\Desktop\CA1\CA1\target/endorsed" />
+      <module name="CA1" options="-endorseddirs &quot;C:\Users\Kofoed\My Drive\Skole\Data\Semester3\CA1\target/endorsed&quot;" />
     </option>
   </component>
 </project>
