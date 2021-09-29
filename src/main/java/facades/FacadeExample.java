@@ -1,6 +1,6 @@
 package facades;
 
-import dtos.RenameMeDTO;
+import dtos.PersonDTO;
 import entities.Person;
 
 import java.util.List;
@@ -32,21 +32,21 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
     
-    public RenameMeDTO create(RenameMeDTO rm){
-        Person rme = new Person(rm.getDummyStr1(), rm.getDummyStr2());
+    public PersonDTO create(PersonDTO pdto){
+        Person p = new Person(pdto.getDto_fName(), pdto.getDto_lName(), pdto.getDto_email());
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(rme);
+            em.persist(p);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return new RenameMeDTO(rme);
+        return new PersonDTO(p);
     }
-    public RenameMeDTO getById(long id){
+    public PersonDTO getById(long id){
         EntityManager em = emf.createEntityManager();
-        return new RenameMeDTO(em.find(Person.class, id));
+        return new PersonDTO(em.find(Person.class, id));
     }
     
     public long getRenameMeCount(){
@@ -59,11 +59,11 @@ public class FacadeExample {
         }
     }
     
-    public List<RenameMeDTO> getAll(){
+    public List<PersonDTO> getAll(){
         EntityManager em = emf.createEntityManager();
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
         List<Person> rms = query.getResultList();
-        return RenameMeDTO.getDtos(rms);
+        return PersonDTO.getDtos(rms);
     }
     
     public static void main(String[] args) {

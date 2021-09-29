@@ -63,8 +63,8 @@ public class RenameMeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new Person("Some txt", "More text");
-        r2 = new Person("aaa", "bbb");
+        r1 = new Person("Some txt", "More text", "Nick");
+        r2 = new Person("aaa", "bbb", "Ren");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();

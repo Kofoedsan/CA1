@@ -15,47 +15,106 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private int person_id;
+    private int a_id;
+    private int p_id;
+    private int h_id;
+    private String fName;
+    private String lName;
+    private String email;
+
+
     public Person() {
-    }  
-    
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-    private String dummyStr1;
-    private String dummyStr2;
-
-    public Person(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
     }
 
-    public Long getId() {
-        return id;
+
+    public Person(String fName, String lName, String email)
+    {
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getDummyStr1() {
-        return dummyStr1;
+    public int getPerson_id()
+    {
+        return person_id;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.dummyStr1 = dummyStr1;
+    public void setPerson_id(int person_id)
+    {
+        this.person_id = person_id;
     }
 
-    public String getDummyStr2() {
-        return dummyStr2;
+    public int getA_id()
+    {
+        return a_id;
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.dummyStr2 = dummyStr2;
+    public void setA_id(int a_id)
+    {
+        this.a_id = a_id;
     }
-    
-    
-    
 
-   
+    public int getP_id()
+    {
+        return p_id;
+    }
+
+    public void setP_id(int p_id)
+    {
+        this.p_id = p_id;
+    }
+
+    public int getH_id()
+    {
+        return h_id;
+    }
+
+    public void setH_id(int h_id)
+    {
+        this.h_id = h_id;
+    }
+
+    public String getfName()
+    {
+        return fName;
+    }
+
+    public void setfName(String fName)
+    {
+        this.fName = fName;
+    }
+
+    public String getlName()
+    {
+        return lName;
+    }
+
+    public void setlName(String lName)
+    {
+        this.lName = lName;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName() + "(" +
+                "person_id = " + person_id + ", " +
+                "a_id = " + a_id + ", " +
+                "p_id = " + p_id + ", " +
+                "h_id = " + h_id + ", " +
+                "fName = " + fName + ", " +
+                "lName = " + lName + ", " +
+                "email = " + email + ")";
+    }
 }

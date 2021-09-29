@@ -41,8 +41,8 @@ public class FacadeExampleTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.persist(new Person("Some txt", "More text"));
-            em.persist(new Person("aaa", "bbb"));
+            em.persist(new Person("Some txt", "More text", "adda"));
+            em.persist(new Person("aaa", "bbb", "addaaa"));
 
             em.getTransaction().commit();
         } finally {
