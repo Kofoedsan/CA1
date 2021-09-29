@@ -50,7 +50,7 @@ public class PersonResource
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllPersons(){
-        List <PersonsDTO> persons = (List<PersonsDTO>) FACADE.getAllPersons();
+        PersonsDTO persons = FACADE.getAllPersons();
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
 
