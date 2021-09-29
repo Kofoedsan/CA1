@@ -118,7 +118,8 @@ public class PersonFacade implements IPersonFacade
     @Override
     public PersonDTO getPerson(int id)
     {
-        return null;
+       EntityManager em = getEntityManager();
+       return new PersonDTO(em.find(Person.class, id));
     }
 
     @Override
@@ -130,7 +131,10 @@ public class PersonFacade implements IPersonFacade
     @Override
     public PersonsDTO getAllPersons()
     {
-        return null;
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> persons = query.getResultList();
+        return new PersonsDTO(persons);
     }
 
     @Override

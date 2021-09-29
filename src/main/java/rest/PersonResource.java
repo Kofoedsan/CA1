@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.PersonDTO;
+import dtos.PersonsDTO;
 import utils.EMF_Creator;
 import facades.PersonFacade;
 import javax.persistence.EntityManagerFactory;
@@ -34,6 +35,23 @@ public class PersonResource
         long count = FACADE.getRenameMeCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getById(@PathParam("id") int id){
+        PersonDTO pdID = FACADE.getPerson(id);
+        return Response.ok().entity(GSON.toJson(pdID)).build();
+    }
+
+    @GET
+    @Path("all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAll(){
+
+        PersonsDTO lpdto = FACADE.getAllPersons();
+        return Response.ok().entity(GSON.toJson(lpdto)).build();
     }
 
 

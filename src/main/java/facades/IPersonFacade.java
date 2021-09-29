@@ -6,21 +6,21 @@ import dtos.PersonsDTO;
 public interface IPersonFacade
 {
 
-    public PersonDTO addPerson(PersonDTO p);
+    PersonDTO addPerson(PersonDTO p);
 
-    public PersonDTO deletePerson(int id);
+    PersonDTO deletePerson(int id);
 
-    public PersonDTO getPerson(int id);
+    PersonDTO getPerson(int id);
 
-    public PersonDTO updatePerson(PersonDTO p);
+    PersonDTO updatePerson(PersonDTO p);
 
-    public PersonsDTO getAllPersons();
+    PersonsDTO getAllPersons();
 
-    public PersonsDTO getAllPersonsWithHobby(int id);
+    PersonsDTO getAllPersonsWithHobby(int id);
 
-    public PersonsDTO getAllPersonsLivingInCity(int id);
+    PersonsDTO getAllPersonsLivingInCity(int id);
 
-    public PersonsDTO getAllPhonesFromPersonWithHobby(int id);
+    PersonsDTO getAllPhonesFromPersonWithHobby(int id);
 
 
 }
