@@ -31,8 +31,8 @@ public class PersonDTO {
 
     public PersonDTO(Person p)
     {
-        if(p.getPerson_id() > 0)
-            this.dto_id = p.getPerson_id();
+        if(p.getPerson_id() > 0) {
+            this.dto_id = p.getPerson_id(); }
         this.dto_fName = p.getfName();
         this.dto_lName = p.getlName();
         this.dto_email = p.getEmail();
