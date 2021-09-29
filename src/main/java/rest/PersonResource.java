@@ -51,6 +51,7 @@ public class PersonResource
     public Response getAll(){
 
         PersonsDTO lpdto = FACADE.getAllPersons();
+        System.out.println(lpdto);
         return Response.ok().entity(GSON.toJson(lpdto)).build();
     }
 

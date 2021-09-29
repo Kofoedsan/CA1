@@ -30,8 +30,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(int person_id, String fName, String lName, String email, Phone phone, Address address, List<Hobby> hobbies) {
-        this.person_id = person_id;
+    public Person(String fName, String lName, String email, Phone phone, Address address, List<Hobby> hobbies) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
