@@ -18,8 +18,8 @@ public class Populator {
         Person ps2 = new Person("Grimme", "Fede", "Nick");
         Person ps3 = new Person("Negerkongen", "Kongeneger", "negermail@negerland.neger");
 
-        Hobby h1 = new Hobby("svømning", "Svømme.");
-        Hobby h2 = new Hobby("Fiskning", "Fiskeri");
+        Hobby h1 = new Hobby("svømning", "Svømme","2","5");
+        Hobby h2 = new Hobby("Fiskning", "Fiskeri","3","6");
 
         Phone p1 = new Phone(55);
         Phone p2 = new Phone(66);

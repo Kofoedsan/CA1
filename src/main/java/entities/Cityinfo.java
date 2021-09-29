@@ -1,26 +1,26 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Cityinfo {
+public class Cityinfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "c_id", nullable = false)
-    private int id;
-    private int zip;
+    @Column(length = 4)
+    private int zipCode;
+    @Column(length=35)
     private String city;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cityinfo")
     List<Address> addresses;
 
     public Cityinfo() {
     }
 
-    public Cityinfo(int zip, String city) {
-        this.zip = zip;
+    public Cityinfo(int zipCode, String city) {
+        this.zipCode = zipCode;
         this.city = city;
     }
 
@@ -32,12 +32,12 @@ public class Cityinfo {
         this.addresses = addresses;
     }
 
-    public int getZip() {
-        return zip;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZip(int zip) {
-        this.zip = zip;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {
@@ -48,19 +48,12 @@ public class Cityinfo {
         this.city = city;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "zip = " + zip + ", " +
-                "city = " + city + ")";
+        return "Cityinfo{" +
+                "zipCode=" + zipCode +
+                ", city='" + city + '\'' +
+                ", addresses=" + addresses +
+                '}';
     }
 }

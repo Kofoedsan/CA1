@@ -1,65 +1,71 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Hobby
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int h_id;
-    private String name;
-    private String description;
+public class Hobby implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @Column(length = 50)
+    private String name;
+
+    private String wikiLink;
+    private String category;
+    private String type;
 
     public Hobby()
     {
     }
 
-    public Hobby(String name, String description)
-    {
+
+    public Hobby(String name, String wikiLink, String category, String type) {
         this.name = name;
-        this.description = description;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
     }
 
-    public int getH_id()
-    {
-        return h_id;
-    }
-
-    public void setH_id(int h_id)
-    {
-        this.h_id = h_id;
-    }
-
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription()
-    {
-        return description;
+    public String getWikiLink() {
+        return wikiLink;
     }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @Override
-    public String toString()
-    {
-        return getClass().getSimpleName() + "(" +
-                "h_id = " + h_id + ", " +
-                "name = " + name + ", " +
-                "description = " + description;
+    public String toString() {
+        return "Hobby{" +
+                "name='" + name + '\'' +
+                ", wikiLink='" + wikiLink + '\'' +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
