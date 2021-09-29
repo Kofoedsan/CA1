@@ -8,18 +8,11 @@ import javax.persistence.Persistence;
 
 public class EMF_Creator {
 
-    /**
-     * Call this method before all integration tests that uses the Grizzly
-     * Server and the Test Database (in @BeforeAll ) Remember to call
-     * enRestTestWithDB() in @AfterAll
-     */
     public static void startREST_TestWithDB() {
         System.setProperty("IS_INTEGRATION_TEST_WITH_DB", "testing");
     }
 
-    /*
-      Call this method in your @AfterAll method if startREST_TestWithDB() was previously called
-     */
+
     public static void endREST_TestWithDB() {
         System.clearProperty("IS_INTEGRATION_TEST_WITH_DB");
     }
@@ -59,9 +52,6 @@ public class EMF_Creator {
             return Persistence.createEntityManagerFactory("pu", props);
         }
 
-        /* Strategy for dev and test
-           Uses the two persistence units declared in persistence.xml
-         */
         String puName = isTest || System.getProperty("IS_INTEGRATION_TEST_WITH_DB") != null ? "puTest" : "pu"; //Only legal names
         if (puName.equals("puTest")) {
             System.out.println("Using the TEST database via persistence-unit --> puTest ");

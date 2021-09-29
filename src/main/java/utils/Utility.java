@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import dtos.RenameMeDTO;
@@ -14,10 +9,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author tha
- */
+
 public class Utility {
     private static Gson gson = new GsonBuilder().create();
     
@@ -42,7 +34,6 @@ public class Utility {
     public static void main(String[] args) throws UnsupportedEncodingException {
 //        printAllProperties();
         
-        //Test json2DTO and back again
         String str2 = "{'id':1, 'str1':'Dette er den første tekst', 'str2':'Her er den ANDEN'}";
         RenameMeDTO rmDTO = json2DTO(str2);
         System.out.println(rmDTO);
