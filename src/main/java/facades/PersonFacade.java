@@ -80,10 +80,10 @@ public class PersonFacade implements IPersonFacade
         Person person = new Person(p.getDto_fName(), p.getDto_lName(), p.getDto_email());
         EntityManager em = emf.createEntityManager();
 
-        if (p.getDto_fName() == null || p.getDto_lName() == null || p.getDto_email() == null )
-        {
-//            throw new PersonException(400, "to Create a new Person First Name and/or Last Name is must be included");
-        }
+//        if (p.getDto_fName() == null || p.getDto_lName() == null || p.getDto_email() == null )
+//        {
+////            throw new PersonException(400, "to Create a new Person First Name and/or Last Name is must be included");
+//        }
         try
         {
             em.getTransaction().begin();
@@ -99,7 +99,20 @@ public class PersonFacade implements IPersonFacade
     @Override
     public PersonDTO deletePerson(int id)
     {
-        return null;
+        EntityManager em = getEntityManager();
+        Person p = em.find(Person.class, id);
+//        if (p == null)
+//            throw new PersonException(404, "Could not delete person with: " + id + " bacause it does not exist");
+        try
+        {
+            em.getTransaction().begin();
+            em.remove(p);
+            em.getTransaction().commit();
+        } finally
+        {
+            em.close();
+        }
+        return new PersonDTO(p);
     }
 
     @Override

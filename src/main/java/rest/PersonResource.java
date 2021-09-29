@@ -19,18 +19,6 @@ public class PersonResource
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
 
-
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response createPerson(String p)
-    {
-        PersonDTO personDTO = GSON.fromJson(p, PersonDTO.class);
-        PersonDTO result = FACADE.addPerson(personDTO);
-        return Response.ok().entity(GSON.toJson(result)).build();
-    }
-
-
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -42,9 +30,31 @@ public class PersonResource
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
-       
+
         long count = FACADE.getRenameMeCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
+
+
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response createPerson(String p)
+    {
+        PersonDTO personDTO = GSON.fromJson(p, PersonDTO.class);
+        PersonDTO result = FACADE.addPerson(personDTO);
+        return Response.ok().entity(GSON.toJson(result)).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response delete(@PathParam("id") Integer id)
+    {
+        PersonDTO result = FACADE.deletePerson(id);
+        return Response.ok().entity(GSON.toJson(result)).build();
+    }
+
+
 }
