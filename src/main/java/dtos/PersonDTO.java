@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class PersonDTO {
-    private long dto_id;
+    private int dto_id;
     private String dto_fName;
     private String dto_lName;
     private String dto_email;
@@ -44,7 +44,7 @@ public class PersonDTO {
         return dto_id;
     }
 
-    public void setDto_id(long dto_id)
+    public void setDto_id(int dto_id)
     {
         this.dto_id = dto_id;
     }

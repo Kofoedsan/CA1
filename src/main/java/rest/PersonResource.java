@@ -50,7 +50,7 @@ public class PersonResource
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response delete(@PathParam("id") Integer id)
+    public Response delete(@PathParam("id") int id)
     {
         PersonDTO result = FACADE.deletePerson(id);
         return Response.ok().entity(GSON.toJson(result)).build();
