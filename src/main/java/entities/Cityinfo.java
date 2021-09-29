@@ -1,10 +1,11 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Cityinfo
-{
+public class Cityinfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_id", nullable = false)
@@ -12,39 +13,51 @@ public class Cityinfo
     private int zip;
     private String city;
 
-    public int getZip()
-    {
-        return zip;
+    @OneToMany
+    List<Address> addresses;
+
+    public Cityinfo() {
     }
 
-    public void setZip(int zip)
-    {
+    public Cityinfo(int zip, String city) {
         this.zip = zip;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public void setCity(String city)
-    {
         this.city = city;
     }
 
-    public int getId()
-    {
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "zip = " + zip + ", " +

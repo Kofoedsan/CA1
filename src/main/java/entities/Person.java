@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,23 +14,62 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int person_id;
-    private int a_id;
-    private int p_id;
-    private int h_id;
     private String fName;
     private String lName;
     private String email;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Phone phone;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Address address;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Hobby> hobbies = new ArrayList<>();
 
     public Person() {
     }
 
+    public Person(int person_id, String fName, String lName, String email, Phone phone, Address address, List<Hobby> hobbies) {
+        this.person_id = person_id;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.hobbies = hobbies;
+    }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Person(String fName, String lName, String email)
     {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
     public int getPerson_id()
@@ -42,35 +82,6 @@ public class Person implements Serializable {
         this.person_id = person_id;
     }
 
-    public int getA_id()
-    {
-        return a_id;
-    }
-
-    public void setA_id(int a_id)
-    {
-        this.a_id = a_id;
-    }
-
-    public int getP_id()
-    {
-        return p_id;
-    }
-
-    public void setP_id(int p_id)
-    {
-        this.p_id = p_id;
-    }
-
-    public int getH_id()
-    {
-        return h_id;
-    }
-
-    public void setH_id(int h_id)
-    {
-        this.h_id = h_id;
-    }
 
     public String getfName()
     {
@@ -107,9 +118,6 @@ public class Person implements Serializable {
     {
         return getClass().getSimpleName() + "(" +
                 "person_id = " + person_id + ", " +
-                "a_id = " + a_id + ", " +
-                "p_id = " + p_id + ", " +
-                "h_id = " + h_id + ", " +
                 "fName = " + fName + ", " +
                 "lName = " + lName + ", " +
                 "email = " + email + ")";

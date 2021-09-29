@@ -11,7 +11,7 @@ public class Hobby
     private int h_id;
     private String name;
     private String description;
-    private int person_id;
+
 
     public Hobby()
     {
@@ -53,15 +53,6 @@ public class Hobby
         this.description = description;
     }
 
-    public int getPerson_id()
-    {
-        return person_id;
-    }
-
-    public void setPerson_id(int person_id)
-    {
-        this.person_id = person_id;
-    }
 
     @Override
     public String toString()
@@ -69,7 +60,6 @@ public class Hobby
         return getClass().getSimpleName() + "(" +
                 "h_id = " + h_id + ", " +
                 "name = " + name + ", " +
-                "description = " + description + ", " +
-                "person_id = " + person_id + ")";
+                "description = " + description;
     }
 }
