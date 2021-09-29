@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("xxx")
 public class PersonResource
@@ -48,11 +49,9 @@ public class PersonResource
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getAll(){
-
-        PersonsDTO lpdto = FACADE.getAllPersons();
-        System.out.println(lpdto);
-        return Response.ok().entity(GSON.toJson(lpdto)).build();
+    public Response getAllPersons(){
+        List <PersonsDTO> persons = (List<PersonsDTO>) FACADE.getAllPersons();
+        return Response.ok().entity(GSON.toJson(persons)).build();
     }
 
 

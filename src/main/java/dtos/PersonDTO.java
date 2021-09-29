@@ -18,8 +18,6 @@ public class PersonDTO {
     private Address dto_address;
     private List<Hobby> dto_hobbies = new ArrayList<>();
 
-    {
-    }
 
     public PersonDTO(String dto_fName, String dto_lName, String dto_email) {
         this.dto_fName = dto_fName;

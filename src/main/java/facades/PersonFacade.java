@@ -7,6 +7,7 @@ import entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
@@ -17,7 +18,6 @@ public class PersonFacade implements IPersonFacade
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
 
-    //Private Constructor to ensure Singleton
     private PersonFacade() {}
 
     public static PersonFacade getFacadeExample(EntityManagerFactory _emf) {
@@ -35,28 +35,19 @@ public class PersonFacade implements IPersonFacade
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade fe = getFacadeExample(emf);
-        fe.getAll().forEach(dto->System.out.println(dto));
+        fe.DONOTUSE().forEach(dto->System.out.println(dto));
     }
 
-    public PersonDTO create(PersonDTO pdto){
-        Person p = new Person(pdto.getDto_fName(), pdto.getDto_lName(), pdto.getDto_email());
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        return new PersonDTO(p);
-    }
-    public PersonDTO getById(long id){
-        EntityManager em = getEntityManager();
-        return new PersonDTO(em.find(Person.class, id));
+//DO NOT USE THESE TWO METHODS
+    public List<PersonDTO> DONOTUSE(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> rms = query.getResultList();
+        return PersonDTO.getDtos(rms);
     }
 
     public long getRenameMeCount(){
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try{
             long renameMeCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
             return renameMeCount;
@@ -64,19 +55,10 @@ public class PersonFacade implements IPersonFacade
             em.close();
         }
     }
-
-    public List<PersonDTO> getAll(){
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-        List<Person> rms = query.getResultList();
-        return PersonDTO.getDtos(rms);
-    }
-
-
+//END OF TWO METHODS
 
     @Override
-    public PersonDTO addPerson(PersonDTO p)
-    {
+    public PersonDTO addPerson(PersonDTO p) {
         Person person = new Person(p.getDto_fName(), p.getDto_lName(), p.getDto_email(),p.getDto_phone(),p.getDto_address(),p.getDto_hobbies());
         EntityManager em = emf.createEntityManager();
 
@@ -97,8 +79,7 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO deletePerson(int id)
-    {
+    public PersonDTO deletePerson(int id) {
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
 //        if (p == null)
@@ -116,42 +97,35 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO getPerson(int id)
-    {
-       EntityManager em = getEntityManager();
-       return new PersonDTO(em.find(Person.class, id));
-    }
-
-    @Override
-    public PersonDTO updatePerson(PersonDTO p)
-    {
+    public PersonDTO getPerson(int id) {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPersons()
-    {
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+    public PersonDTO updatePerson(PersonDTO p) {
+        return null;
+    }
+
+    @Override
+    public PersonsDTO getAllPersons() {
+        EntityManager em = getEntityManager();
+        TypedQuery <Person> query = em.createQuery("SELECT p FROM Person p JOIN fetch p.address JOIN fetch p.hobbies JOIN fetch  p.phone", Person.class);
         List<Person> persons = query.getResultList();
         return new PersonsDTO(persons);
     }
 
     @Override
-    public PersonsDTO getAllPersonsWithHobby(int id)
-    {
+    public PersonsDTO getAllPersonsWithHobby(int id) {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPersonsLivingInCity(int id)
-    {
+    public PersonsDTO getAllPersonsLivingInCity(int id) {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPhonesFromPersonWithHobby(int id)
-    {
+    public PersonsDTO getAllPhonesFromPersonWithHobby(int id) {
         return null;
     }
 }
