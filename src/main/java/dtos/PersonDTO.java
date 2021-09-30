@@ -17,8 +17,8 @@ public class PersonDTO {
     private int dto_zipCode;
     private String dto_street;
     private String dto_city;
-    private List<Hobby> dto_hobbies = new ArrayList<>();
-//    private List<HobbyDTO> dto_hobbies = new ArrayList<>();
+//    private List<Hobby> dto_hobbies = new ArrayList<>();
+    private List<HobbyDTO> dto_hobbies;
 
     public static List<PersonDTO> getDtos(List<Person> lp) {
         List<PersonDTO> pdtos = new ArrayList();
@@ -37,7 +37,7 @@ public class PersonDTO {
         this.dto_street = p.getAddress().getStreet();
         this.dto_city = p.getAddress().getCityinfo().getCity();
         this.dto_zipCode = p.getAddress().getCityinfo().getZipCode();
-        this.dto_hobbies = p.getHobbies();
+        this.dto_hobbies = HobbyDTO.getDtos(p.getHobbies());
     }
 
     public int getDto_phone() {
@@ -72,11 +72,11 @@ public class PersonDTO {
         this.dto_city = dto_city;
     }
 
-    public List<Hobby> getDto_hobbies() {
+    public List<HobbyDTO> getDto_hobbies() {
         return dto_hobbies;
     }
 
-    public void setDto_hobbies(List<Hobby> dto_hobbies) {
+    public void setDto_hobbies(List<HobbyDTO> dto_hobbies) {
         this.dto_hobbies = dto_hobbies;
     }
 

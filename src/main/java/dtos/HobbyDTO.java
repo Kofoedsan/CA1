@@ -19,7 +19,7 @@ public class HobbyDTO {
     public HobbyDTO(HobbyDTO h) {
     }
 
-    public static List<HobbyDTO> getDtos(List<HobbyDTO> hb) {
+    public static List<HobbyDTO> getDtos(List<Hobby> hb) {
         List<HobbyDTO> hDTO = new ArrayList();
         hb.forEach(h -> hDTO.add(new HobbyDTO(h)));
         return hDTO;
