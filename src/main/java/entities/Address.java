@@ -14,7 +14,8 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Person> persons;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Cityinfo cityinfo;
 
     public Address() {

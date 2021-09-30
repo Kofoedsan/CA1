@@ -8,7 +8,6 @@ import java.util.List;
 public class Cityinfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 4)
     private int zipCode;
     @Column(length=35)
@@ -16,8 +15,8 @@ public class Cityinfo implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "cityinfo")
-    List<Address> addresses;
+    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.PERSIST)
+    private List<Address> addresses;
 
     public Cityinfo() {
     }
