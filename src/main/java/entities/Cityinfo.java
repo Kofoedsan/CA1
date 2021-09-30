@@ -8,10 +8,14 @@ import java.util.List;
 public class Cityinfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+//    @Column(name = "c_id", nullable = false)
+//    private int c_id;
     @Column(length = 4)
     private int zipCode;
     @Column(length=35)
     private String city;
+
+
 
     @OneToMany(mappedBy = "cityinfo")
     List<Address> addresses;
@@ -23,6 +27,7 @@ public class Cityinfo implements Serializable {
         this.zipCode = zipCode;
         this.city = city;
     }
+
 
     public List<Address> getAddresses() {
         return addresses;

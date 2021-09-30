@@ -1,7 +1,5 @@
 package entities;
 
-import org.eclipse.persistence.jpa.config.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -38,8 +36,8 @@ public class Address {
         return cityinfo;
     }
 
-    public void setCityinfo(Cityinfo cityinfo) {
-        this.cityinfo = cityinfo;
+    public void setCityinfo(Cityinfo cityinfo_id) {
+        this.cityinfo = cityinfo_id;
     }
 
     public int getA_id() {

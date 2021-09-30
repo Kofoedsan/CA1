@@ -30,13 +30,11 @@ public class Person implements Serializable {
     public Person() {
     }
 
-
     public Person(String fName, String lName, String email) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
     }
-
 
     public List<Hobby> getHobbies() {
         return hobbies;
@@ -45,7 +43,6 @@ public class Person implements Serializable {
     public void setHobbies(List<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
-
 
     public Address getAddress() {
         return address;
@@ -75,7 +72,6 @@ public class Person implements Serializable {
     {
         this.person_id = person_id;
     }
-
 
     public String getfName()
     {

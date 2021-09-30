@@ -27,8 +27,8 @@ public class Populator {
         Phone p3 = new Phone(77);
 
         Address a1 = new Address("Nordlyst 8 ");
-        Address a2 = new Address("Nexø");
-        Address a3 = new Address("Svaneke");
+        Address a2 = new Address("add");
+        Address a3 = new Address("Svaadddneke");
 
         Cityinfo c1 = new Cityinfo(3700, "Rønne");
         Cityinfo c2 = new Cityinfo(3780, "Nexø");
@@ -41,9 +41,9 @@ public class Populator {
         ps1.setPhone(p1);
         ps2.setPhone(p2);
         ps3.setPhone(p3);
+
         a1.setCityinfo(c1);
-        a2.setCityinfo(c2);
-        a3.setCityinfo(c3);
+
 
         ps1.setAddress(a1);
         ps2.setAddress(a2);

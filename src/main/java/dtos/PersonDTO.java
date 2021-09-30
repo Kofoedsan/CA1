@@ -3,9 +3,7 @@ package dtos;
 import entities.Address;
 import entities.Hobby;
 import entities.Person;
-import entities.Phone;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,6 @@ public class PersonDTO {
     private String dto_street;
     private String dto_city;
     private List<Hobby> dto_hobbies = new ArrayList<>();
-
 
     public static List<PersonDTO> getDtos(List<Person> lp) {
         List<PersonDTO> pdtos = new ArrayList();
