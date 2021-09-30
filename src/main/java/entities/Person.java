@@ -14,9 +14,6 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int person_id;
-    private int address_id;
-    private int phone_id;
-    private int hobby_id;
     private String fName;
     private String lName;
     private String email;
@@ -33,28 +30,6 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String fName, String lName, String email, Phone phone, Address address, List<Hobby> hobbies) {
-        this.fName = fName;
-        this.lName = lName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.hobbies = hobbies;
-    }
-
-
-    public Person(Person p) {
-        if (p.getPerson_id() != 0) {
-            this.person_id = p.getPerson_id();
-        }
-        this.fName = p.getfName();
-        this.lName = p.getlName();
-        this.email = p.getEmail();
-        this.phone = p.getPhone();
-        this.address = p.getAddress();
-        this.hobbies = p.getHobbies();
-    }
-
 
     public Person(String fName, String lName, String email) {
         this.fName = fName;
@@ -62,29 +37,6 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public int getAddress_id() {
-        return address_id;
-    }
-
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
-    }
-
-    public int getPhone_id() {
-        return phone_id;
-    }
-
-    public void setPhone_id(int phone_id) {
-        this.phone_id = phone_id;
-    }
-
-    public int getHobby_id() {
-        return hobby_id;
-    }
-
-    public void setHobby_id(int hobby_id) {
-        this.hobby_id = hobby_id;
-    }
 
     public List<Hobby> getHobbies() {
         return hobbies;

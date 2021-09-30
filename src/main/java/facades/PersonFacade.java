@@ -7,7 +7,6 @@ import entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
@@ -98,7 +97,8 @@ public class PersonFacade implements IPersonFacade
 
     @Override
     public PersonDTO getPerson(int id) {
-        return null;
+        EntityManager em = emf.createEntityManager();
+        return new PersonDTO(em.find(Person.class, id));
     }
 
     @Override

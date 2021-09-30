@@ -43,15 +43,12 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person p) {
-        if (p.getPerson_id() != 0) {
+        if (p.getPerson_id() != 0)
             this.dto_id = p.getPerson_id();
-        }
         this.dto_fName = p.getfName();
         this.dto_lName = p.getlName();
         this.dto_email = p.getEmail();
-        this.dto_phone = p.getPhone();
-        this.dto_address = p.getAddress();
-        this.dto_hobbies = p.getHobbies();
+
     }
 
     public Phone getDto_phone() {
