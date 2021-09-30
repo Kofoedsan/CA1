@@ -15,7 +15,7 @@ public class Address {
     private List<Person> persons;
 
     @JoinColumn
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Cityinfo cityinfo;
 
     public Address() {

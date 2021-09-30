@@ -15,7 +15,7 @@ public class Cityinfo implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.MERGE)
     private List<Address> addresses;
 
     public Cityinfo() {
