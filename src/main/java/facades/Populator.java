@@ -43,6 +43,8 @@ public class Populator {
         ps3.setPhone(p3);
 
         a1.setCityinfo(c1);
+        a2.setCityinfo(c2);
+        a3.setCityinfo(c3);
 
 
         ps1.setAddress(a1);

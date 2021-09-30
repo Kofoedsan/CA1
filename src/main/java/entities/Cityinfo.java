@@ -8,6 +8,7 @@ import java.util.List;
 public class Cityinfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 4)
     private int zipCode;
     @Column(length=35)
