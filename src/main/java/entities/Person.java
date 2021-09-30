@@ -20,6 +20,8 @@ public class Person implements Serializable {
     private String lName;
     private String email;
 
+
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Phone phone;
 
@@ -30,6 +32,14 @@ public class Person implements Serializable {
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person() {
+    }
+
+    public Person(String fName, String lName, String email, Phone phone)
+    {
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.phone = phone;
     }
 
     public Person(String fName, String lName, String email) {

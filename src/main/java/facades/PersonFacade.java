@@ -1,8 +1,14 @@
 package facades;
 
+import dtos.CityinfoDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
+import dtos.PhoneDTO;
+import entities.Address;
+import entities.Cityinfo;
 import entities.Person;
+import entities.Phone;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,34 +20,49 @@ public class PersonFacade implements IPersonFacade
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
 
-    private PersonFacade() {}
+    private PersonFacade()
+    {
+    }
 
-    public static PersonFacade getPersonFacadeMethods(EntityManagerFactory _emf) {
-        if (instance == null) {
+    public static PersonFacade getPersonFacadeMethods(EntityManagerFactory _emf)
+    {
+        if (instance == null)
+        {
             emf = _emf;
             instance = new PersonFacade();
         }
         return instance;
     }
 
-    private EntityManager getEntityManager() {
+    private EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
-     public long getPersonCount(){
+    public long getPersonCount()
+    {
         EntityManager em = emf.createEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
+        try
+        {
+            long renameMeCount = (long) em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
             return renameMeCount;
-        }finally{
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public PersonDTO addPerson(PersonDTO p) {
-        Person person = new Person(p.getDto_fName(), p.getDto_lName(), p.getDto_email());
+    public PersonDTO addPerson(PersonDTO p)
+    {
         EntityManager em = emf.createEntityManager();
+        Person person = new Person(p.getDto_fName(), p.getDto_lName(), p.getDto_email());
+        Phone phone = new Phone(p.getDto_phone());
+        person.setPhone(phone);
+        Address address = new Address(p.getDto_street());
+        Cityinfo cityinfo = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
+        address.setCityinfo(cityinfo);
+        person.setAddress(address);
 
 //        if (p.getDto_fName() == null || p.getDto_lName() == null || p.getDto_email() == null )
 //        {
@@ -60,7 +81,8 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO deletePerson(int id) {
+    public PersonDTO deletePerson(int id)
+    {
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
 //        if (p == null)
@@ -78,36 +100,42 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO getPerson(int id) {
+    public PersonDTO getPerson(int id)
+    {
         EntityManager em = emf.createEntityManager();
         return new PersonDTO(em.find(Person.class, id));
     }
 
     @Override
-    public PersonDTO updatePerson(PersonDTO p) {
+    public PersonDTO updatePerson(PersonDTO p)
+    {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPersons() {
+    public PersonsDTO getAllPersons()
+    {
         EntityManager em = getEntityManager();
-        TypedQuery <Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
         List<Person> persons = query.getResultList();
         return new PersonsDTO(persons);
     }
 
     @Override
-    public PersonsDTO getAllPersonsWithHobby(int id) {
+    public PersonsDTO getAllPersonsWithHobby(int id)
+    {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPersonsLivingInCity(int id) {
+    public PersonsDTO getAllPersonsLivingInCity(int id)
+    {
         return null;
     }
 
     @Override
-    public PersonsDTO getAllPhonesFromPersonWithHobby(int id) {
+    public PersonsDTO getAllPhonesFromPersonWithHobby(int id)
+    {
         return null;
     }
 }

@@ -23,6 +23,11 @@ public class PhoneDTO {
         return adDTO;
     }
 
+    public PhoneDTO(int dto_number)
+    {
+        this.dto_number = dto_number;
+    }
+
     public PhoneDTO(Phone a) {
         if (a.getPhone_id() != 0) {
         }

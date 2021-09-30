@@ -34,6 +34,8 @@ public class AddressDTO {
         this.dto_cityinfo = a.getCityinfo();
     }
 
+
+
     public int getDto_a_id() {
         return dto_a_id;
     }
