@@ -10,7 +10,6 @@ public class Hobby implements Serializable {
     @Id
     @Column(length = 50)
     private String name;
-
     private String wikiLink;
     private String category;
     private String type;
