@@ -5,6 +5,7 @@ import entities.Hobby;
 import entities.Person;
 import entities.Phone;
 
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,27 +15,13 @@ public class PersonDTO {
     private String dto_fName;
     private String dto_lName;
     private String dto_email;
-    private Phone dto_phone;
+    private int dto_phone;
     private Address dto_address;
+    private int dto_zipCode;
+    private String dto_street;
+    private String dto_city;
     private List<Hobby> dto_hobbies = new ArrayList<>();
 
-
-    public PersonDTO(int dto_id, String dto_fName, String dto_lName, String dto_email) {
-       this.dto_id = dto_id;
-        this.dto_fName = dto_fName;
-        this.dto_lName = dto_lName;
-        this.dto_email = dto_email;
-    }
-
-    public PersonDTO(int dto_id, String dto_fName, String dto_lName, String dto_email, Phone dto_phone, Address dto_address, List<Hobby> dto_hobbies) {
-       this.dto_id = dto_id;
-        this.dto_fName = dto_fName;
-        this.dto_lName = dto_lName;
-        this.dto_email = dto_email;
-        this.dto_phone = dto_phone;
-        this.dto_address = dto_address;
-        this.dto_hobbies = dto_hobbies;
-    }
 
     public static List<PersonDTO> getDtos(List<Person> lp) {
         List<PersonDTO> pdtos = new ArrayList();
@@ -43,28 +30,17 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person p) {
-        if (p.getPerson_id() != 0)
+        if (p.getPerson_id() != 0){
             this.dto_id = p.getPerson_id();
+        }
         this.dto_fName = p.getfName();
         this.dto_lName = p.getlName();
         this.dto_email = p.getEmail();
-
-    }
-
-    public Phone getDto_phone() {
-        return dto_phone;
-    }
-
-    public void setDto_phone(Phone dto_phone) {
-        this.dto_phone = dto_phone;
-    }
-
-    public Address getDto_address() {
-        return dto_address;
-    }
-
-    public void setDto_address(Address dto_address) {
-        this.dto_address = dto_address;
+        this.dto_phone = p.getPhone().getNumber();
+        this.dto_street = p.getAddress().getStreet();
+        this.dto_city = p.getAddress().getCityinfo().getCity();
+        this.dto_zipCode = p.getAddress().getCityinfo().getZipCode();
+        this.dto_hobbies = p.getHobbies();
     }
 
     public List<Hobby> getDto_hobbies() {

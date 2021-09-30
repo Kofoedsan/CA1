@@ -10,7 +10,19 @@ public class Phone {
     private int phone_id;
     private int number;
 
+    @OneToOne(mappedBy = "phone")
+    private Person person;
+
+
     public Phone() {
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Phone(int number) {

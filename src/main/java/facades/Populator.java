@@ -20,6 +20,7 @@ public class Populator {
         Hobby h1 = new Hobby("svømning", "Svømme","2","5");
         Hobby h2 = new Hobby("Fiskning", "Fiskeri","3","6");
         Hobby h3 = new Hobby("Fiskning2", "Fiskeri2","3","62");
+        Hobby h4 = new Hobby("Fiskning23", "Fiskeri22","33","622");
 
         Phone p1 = new Phone(55);
         Phone p2 = new Phone(66);
@@ -36,6 +37,7 @@ public class Populator {
         ps1.getHobbies().add(h1);
         ps2.getHobbies().add(h2);
         ps3.getHobbies().add(h3);
+        ps3.getHobbies().add(h4);
         ps1.setPhone(p1);
         ps2.setPhone(p2);
         ps3.setPhone(p3);

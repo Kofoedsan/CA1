@@ -61,6 +61,9 @@ public class Person implements Serializable {
 
     public void setPhone(Phone phone) {
         this.phone = phone;
+        if (phone != null){
+            phone.setPerson(this);
+        }
     }
 
     public int getPerson_id()
