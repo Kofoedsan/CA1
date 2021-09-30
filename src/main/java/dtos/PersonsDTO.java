@@ -17,6 +17,13 @@ public class PersonsDTO {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PersonsDTO{" +
+                "all=" + all +
+                '}';
+    }
+
     // Test only
     public int getSize() {
         return all.size() ;

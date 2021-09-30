@@ -51,6 +51,7 @@ public class PersonResource
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllPersons(){
         PersonsDTO persons = FACADE.getAllPersons();
+        System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
 

@@ -19,13 +19,15 @@ public class PersonDTO {
     private List<Hobby> dto_hobbies = new ArrayList<>();
 
 
-    public PersonDTO(String dto_fName, String dto_lName, String dto_email) {
+    public PersonDTO(int dto_id, String dto_fName, String dto_lName, String dto_email) {
+       this.dto_id = dto_id;
         this.dto_fName = dto_fName;
         this.dto_lName = dto_lName;
         this.dto_email = dto_email;
     }
 
-    public PersonDTO(String dto_fName, String dto_lName, String dto_email, Phone dto_phone, Address dto_address, List<Hobby> dto_hobbies) {
+    public PersonDTO(int dto_id, String dto_fName, String dto_lName, String dto_email, Phone dto_phone, Address dto_address, List<Hobby> dto_hobbies) {
+       this.dto_id = dto_id;
         this.dto_fName = dto_fName;
         this.dto_lName = dto_lName;
         this.dto_email = dto_email;
@@ -41,7 +43,7 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person p) {
-        if (p.getPerson_id() > 0) {
+        if (p.getPerson_id() != 0) {
             this.dto_id = p.getPerson_id();
         }
         this.dto_fName = p.getfName();
