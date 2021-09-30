@@ -3,6 +3,7 @@ package dtos;
 import entities.Address;
 import entities.Cityinfo;
 import entities.Person;
+import entities.Phone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class AddressDTO {
 
     public AddressDTO() {
     }
+
 
     public static List<AddressDTO> getDtos(List<Address> ad) {
         List<AddressDTO> adDTO = new ArrayList();

@@ -3,13 +3,10 @@ package facades;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import entities.Person;
-
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import utils.EMF_Creator;
-
 
 public class PersonFacade implements IPersonFacade
 {
@@ -19,7 +16,7 @@ public class PersonFacade implements IPersonFacade
 
     private PersonFacade() {}
 
-    public static PersonFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static PersonFacade getPersonFacadeMethods(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new PersonFacade();
@@ -31,21 +28,7 @@ public class PersonFacade implements IPersonFacade
         return emf.createEntityManager();
     }
 
-    public static void main(String[] args) {
-        emf = EMF_Creator.createEntityManagerFactory();
-        PersonFacade fe = getFacadeExample(emf);
-        fe.DONOTUSE().forEach(dto->System.out.println(dto));
-    }
-
-//DO NOT USE THESE TWO METHODS
-    public List<PersonDTO> DONOTUSE(){
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-        List<Person> rms = query.getResultList();
-        return PersonDTO.getDtos(rms);
-    }
-
-    public long getRenameMeCount(){
+     public long getPersonCount(){
         EntityManager em = emf.createEntityManager();
         try{
             long renameMeCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
@@ -54,7 +37,6 @@ public class PersonFacade implements IPersonFacade
             em.close();
         }
     }
-//END OF TWO METHODS
 
     @Override
     public PersonDTO addPerson(PersonDTO p) {
