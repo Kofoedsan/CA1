@@ -36,7 +36,7 @@ public class PersonFacade implements IPersonFacade {
     @Override
     public PersonDTO addPerson(PersonDTO p) throws Exception {
         EntityManager em = emf.createEntityManager();
-//TODO Lav check for at se om personen eksistere på email & check on tlf eksistere.
+//TODO Lav check for at se om personen eksistere på email
         Person person = new Person();
         person.setfName(p.getDto_fName());
         person.setlName(p.getDto_lName());
@@ -147,7 +147,6 @@ public class PersonFacade implements IPersonFacade {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address.cityinfo a WHERE a.zipCode = :id ", Person.class);
         query.setParameter("id", id);
         List<Person> result = query.getResultList();
-        System.out.println(result);
         return new PersonsDTO(result);
 
     }
@@ -162,4 +161,18 @@ public class PersonFacade implements IPersonFacade {
     public PersonDTO updatePerson(PersonDTO p) {
         return null;
     }
+
+
+    public PersonDTO getPersonByPhone(int id) {
+        EntityManager em = getEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.phone h WHERE h.number = :name", Person.class);
+        query.setParameter("name", id);
+        Person person = query.getSingleResult();
+
+        return new PersonDTO(person);
+
+    }
+
+
+
 }

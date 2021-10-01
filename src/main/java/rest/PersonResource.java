@@ -45,6 +45,17 @@ public class PersonResource
         return Response.ok().entity(GSON.toJson(pdID)).build();
     }
 
+
+    @GET
+    @Path("phone/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getByPhone(@PathParam("id") int id){
+        PersonDTO pdID = personFacade.getPersonByPhone(id);
+        return Response.ok().entity(GSON.toJson(pdID)).build();
+    }
+
+
+
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})

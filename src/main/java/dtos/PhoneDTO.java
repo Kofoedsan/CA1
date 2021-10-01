@@ -17,6 +17,8 @@ public class PhoneDTO {
     public PhoneDTO() {
     }
 
+
+
     public static List<PhoneDTO> getDtos(List<Phone> ph) {
         List<PhoneDTO> adDTO = new ArrayList();
         ph.forEach(a -> adDTO.add(new PhoneDTO(a)));
