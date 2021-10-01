@@ -13,7 +13,6 @@ public class Cityinfo implements Serializable {
     @Column(length=35)
     private String city;
 
-
     @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.PERSIST)
     private List<Address> addresses;
 
@@ -49,8 +48,6 @@ public class Cityinfo implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-
-
 
     @Override
     public String toString() {

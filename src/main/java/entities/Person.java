@@ -21,14 +21,15 @@ public class Person implements Serializable {
     private String email;
 
 
-
     @OneToOne(cascade = CascadeType.PERSIST)
     private Phone phone;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+
+    @JoinColumn
+    @ManyToMany
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person() {
@@ -55,6 +56,8 @@ public class Person implements Serializable {
     public void setHobbies(List<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
+
+
 
     public Address getAddress() {
         return address;
