@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PersonDTO {
+public class PersonDTO{
     private int dto_id;
     private String dto_fName;
     private String dto_lName;
@@ -39,6 +39,22 @@ public class PersonDTO {
         this.dto_zipCode = p.getAddress().getCityinfo().getZipCode();
         this.dto_hobbies = HobbyDTO.getDtos(p.getHobbies());
     }
+
+    public PersonDTO (PersonDTO pDTO) {
+        if (pDTO.getDto_id() != 0){
+            this.dto_id = pDTO.getDto_id();
+        }
+        this.dto_fName = pDTO.dto_fName;
+        this.dto_lName = pDTO.dto_lName;
+        this.dto_email = pDTO.dto_email;
+        this.dto_phone = pDTO.dto_phone;
+        this.dto_street = pDTO.dto_street;
+        this.dto_city = pDTO.dto_city;
+        this.dto_zipCode = pDTO.dto_zipCode;
+        this.dto_hobbies = pDTO.getDto_hobbies();
+    }
+
+
 
     public int getDto_phone() {
         return dto_phone;
@@ -80,7 +96,7 @@ public class PersonDTO {
         this.dto_hobbies = dto_hobbies;
     }
 
-    public long getDto_id() {
+    public int getDto_id() {
         return dto_id;
     }
 
@@ -119,6 +135,12 @@ public class PersonDTO {
                 ", dto_fName='" + dto_fName + '\'' +
                 ", dto_lName='" + dto_lName + '\'' +
                 ", dto_email='" + dto_email + '\'' +
+                ", dto_phone=" + dto_phone +
+                ", dto_zipCode=" + dto_zipCode +
+                ", dto_street='" + dto_street + '\'' +
+                ", dto_city='" + dto_city + '\'' +
+                ", dto_hobbies=" + dto_hobbies +
                 '}';
     }
 }
+

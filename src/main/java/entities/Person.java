@@ -1,6 +1,7 @@
 package entities;
 
 import dtos.HobbyDTO;
+import dtos.PersonDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Phone phone;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
 
 
     @JoinColumn
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person() {
@@ -48,6 +49,8 @@ public class Person implements Serializable {
         this.lName = lName;
         this.email = email;
     }
+
+
 
     public List<Hobby> getHobbies() {
         return hobbies;
@@ -73,9 +76,9 @@ public class Person implements Serializable {
 
     public void setPhone(Phone phone) {
         this.phone = phone;
-//        if (phone != null){
-//            phone.setPerson(this);
-//        }
+        if (phone != null){
+            phone.setPerson(this);
+        }
     }
 
     public int getPerson_id()

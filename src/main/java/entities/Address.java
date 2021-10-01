@@ -1,5 +1,7 @@
 package entities;
 
+import dtos.CityinfoDTO;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Address {
     private List<Person> persons;
 
     @JoinColumn
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Cityinfo cityinfo;
 
     public Address() {
@@ -37,8 +39,8 @@ public class Address {
         return cityinfo;
     }
 
-    public void setCityinfo(Cityinfo cityinfo_id) {
-        this.cityinfo = cityinfo_id;
+    public void setCityinfo(Cityinfo cityinfo) {
+        this.cityinfo = cityinfo;
     }
 
     public int getA_id() {

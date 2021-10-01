@@ -1,5 +1,7 @@
 package facades;
 
+import dtos.AddressDTO;
+import dtos.CityinfoDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import entities.Address;
@@ -7,6 +9,7 @@ import entities.Cityinfo;
 import entities.Person;
 import entities.Phone;
 import entities.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,21 +40,23 @@ public class PersonFacade implements IPersonFacade {
     @Override
     public PersonDTO addPerson(PersonDTO p) {
         EntityManager em = emf.createEntityManager();
-        Person person = new Person(p.getDto_fName(), p.getDto_lName(), p.getDto_email());
+
+        Person person = new Person();
+        person.setfName(p.getDto_fName());
+        person.setlName(p.getDto_lName());
+        person.setEmail(p.getDto_email());
+
         Phone phone = new Phone(p.getDto_phone());
+        Cityinfo city = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
         Address address = new Address(p.getDto_street());
-        Cityinfo cityinfo = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
-        address.setCityinfo(cityinfo);
+        address.setCityinfo(city);
         person.setAddress(address);
         person.setPhone(phone);
+        List<Hobby> h1 = new ArrayList<>();
+        h1.add(new Hobby("te", "tes", "test", "lele"));
+        person.setHobbies(h1);
 
-//      Hobby hobby = new Hobby("navn1","Wiki1","Cat1","type2");
-//      Hobby hobby1 = new Hobby("ad","Wiki1","Cat1","type2");
-
-        List<Hobby> hobbyList = new ArrayList<>();
-//      hobbyList.add(hobby);
-
-        person.setHobbies(hobbyList);
+        Hobby h16 = em.find(Hobby.class,"NAME");
 
         try {
             em.getTransaction().begin();
@@ -119,12 +124,12 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public PersonsDTO getAllPersonsLivingInCity(int id) {
-            EntityManager em = getEntityManager();
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address.cityinfo a WHERE a.zipCode = :id ", Person.class);
-            query.setParameter("id", id);
-            List<Person> result = query.getResultList();
-            System.out.println(result);
-            return new PersonsDTO(result);
+        EntityManager em = getEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address.cityinfo a WHERE a.zipCode = :id ", Person.class);
+        query.setParameter("id", id);
+        List<Person> result = query.getResultList();
+        System.out.println(result);
+        return new PersonsDTO(result);
 
     }
 

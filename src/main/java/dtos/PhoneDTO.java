@@ -12,7 +12,7 @@ public class PhoneDTO {
 
     private int dto_phone_id;
     private int dto_number;
-    private Person dto_person;
+    private int dto_person;
 
     public PhoneDTO() {
     }
@@ -31,7 +31,7 @@ public class PhoneDTO {
     public PhoneDTO(Phone a) {
         if (a.getPhone_id() != 0) {
         }
-        this.dto_person = a.getPerson();
+        this.dto_person = a.getPerson().getPerson_id();
         this.dto_phone_id = a.getPhone_id();
         this.dto_number = a.getNumber();
 
@@ -54,11 +54,11 @@ public class PhoneDTO {
         this.dto_number = dto_number;
     }
 
-    public Person getDto_person() {
+    public int getDto_person() {
         return dto_person;
     }
 
-    public void setDto_person(Person dto_person) {
+    public void setDto_person(int dto_person) {
         this.dto_person = dto_person;
     }
 }
