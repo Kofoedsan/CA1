@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PhoneDTO {
 
-    private int dto_phone_id;
+//    private int dto_phone_id;
     private int dto_number;
     private int dto_person;
 
@@ -29,22 +29,22 @@ public class PhoneDTO {
     }
 
     public PhoneDTO(Phone a) {
-        if (a.getPhone_id() != 0) {
+        if (a.getNumber() != 0) {
         }
         this.dto_person = a.getPerson().getPerson_id();
-        this.dto_phone_id = a.getPhone_id();
+//        this.dto_phone_id = a.getPhone_id();
         this.dto_number = a.getNumber();
 
     }
 
 
-    public int getDto_phone_id() {
-        return dto_phone_id;
-    }
-
-    public void setDto_phone_id(int dto_phone_id) {
-        this.dto_phone_id = dto_phone_id;
-    }
+//    public int getDto_phone_id() {
+//        return dto_phone_id;
+//    }
+//
+//    public void setDto_phone_id(int dto_phone_id) {
+//        this.dto_phone_id = dto_phone_id;
+//    }
 
     public int getDto_number() {
         return dto_number;

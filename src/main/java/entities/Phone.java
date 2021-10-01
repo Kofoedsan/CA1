@@ -1,34 +1,38 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Phone {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "phone_id", nullable = false)
-    private int phone_id;
+    @Column(name = "number", nullable = false)
     private int number;
+//    private int phone_id;
 
-    @ManyToOne
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Person person;
 
 
     public Phone() {
     }
 
+    public Phone(int number, Person person) {
+        this.number = number;
+        this.person = person;
+    }
+
     public Person getPerson() {
         return person;
     }
 
-    public int getPhone_id() {
-        return phone_id;
-    }
-
-    public void setPhone_id(int phone_id) {
-        this.phone_id = phone_id;
-    }
+//    public int getPhone_id() {
+//        return phone_id;
+//    }
+//
+//    public void setPhone_id(int phone_id) {
+//        this.phone_id = phone_id;
+//    }
 
     public int getNumber() {
         return number;
@@ -45,7 +49,7 @@ public class Phone {
     @Override
     public String toString() {
         return "Phone{" +
-                "phone_id=" + phone_id +
+//                "phone_id=" + phone_id +
                 ", number=" + number +
                 '}';
     }
