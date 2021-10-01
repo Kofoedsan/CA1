@@ -1,7 +1,5 @@
 package dtos;
 
-import entities.Address;
-import entities.Hobby;
 import entities.Person;
 
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ public class PersonDTO{
     private String dto_fName;
     private String dto_lName;
     private String dto_email;
-    private int dto_phone;
+    private List <PhoneDTO> dto_phones;
     private int dto_zipCode;
     private String dto_street;
     private String dto_city;
@@ -32,7 +30,7 @@ public class PersonDTO{
         this.dto_fName = p.getfName();
         this.dto_lName = p.getlName();
         this.dto_email = p.getEmail();
-        this.dto_phone = p.getPhone().getNumber();
+        this.dto_phones = PhoneDTO.getDtos(p.getPhones());
         this.dto_street = p.getAddress().getStreet();
         this.dto_city = p.getAddress().getCityinfo().getCity();
         this.dto_zipCode = p.getAddress().getCityinfo().getZipCode();
@@ -46,7 +44,7 @@ public class PersonDTO{
         this.dto_fName = pDTO.dto_fName;
         this.dto_lName = pDTO.dto_lName;
         this.dto_email = pDTO.dto_email;
-        this.dto_phone = pDTO.dto_phone;
+        this.dto_phones = pDTO.dto_phones;
         this.dto_street = pDTO.dto_street;
         this.dto_city = pDTO.dto_city;
         this.dto_zipCode = pDTO.dto_zipCode;
@@ -54,13 +52,12 @@ public class PersonDTO{
     }
 
 
-
-    public int getDto_phone() {
-        return dto_phone;
+    public List<PhoneDTO> getDto_phones() {
+        return dto_phones;
     }
 
-    public void setDto_phone(int dto_phone) {
-        this.dto_phone = dto_phone;
+    public void setDto_phones(List<PhoneDTO> dto_phones) {
+        this.dto_phones = dto_phones;
     }
 
     public int getDto_zipCode() {
@@ -134,7 +131,7 @@ public class PersonDTO{
                 ", dto_fName='" + dto_fName + '\'' +
                 ", dto_lName='" + dto_lName + '\'' +
                 ", dto_email='" + dto_email + '\'' +
-                ", dto_phone=" + dto_phone +
+                ", dto_phone=" + dto_phones +
                 ", dto_zipCode=" + dto_zipCode +
                 ", dto_street='" + dto_street + '\'' +
                 ", dto_city='" + dto_city + '\'' +

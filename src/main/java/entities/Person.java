@@ -22,12 +22,11 @@ public class Person implements Serializable {
     private String email;
 
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Phone phone;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List <Phone> phone;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
-
 
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -36,8 +35,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String fName, String lName, String email, Phone phone)
-    {
+    public Person(String fName, String lName, String email, List <Phone> phone) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
@@ -67,54 +65,46 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    public Phone getPhone() {
+    public List <Phone> getPhones() {
         return phone;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhones(List <Phone> phone) {
         this.phone = phone;
-        if (phone != null){
-            phone.setPerson(this);
-        }
+//        if (phone != null) {
+//            phone.setPerson();
+//        }
     }
 
-    public int getPerson_id()
-    {
+    public int getPerson_id() {
         return person_id;
     }
 
-    public void setPerson_id(int person_id)
-    {
+    public void setPerson_id(int person_id) {
         this.person_id = person_id;
     }
 
-    public String getfName()
-    {
+    public String getfName() {
         return fName;
     }
 
-    public void setfName(String fName)
-    {
+    public void setfName(String fName) {
         this.fName = fName;
     }
 
-    public String getlName()
-    {
+    public String getlName() {
         return lName;
     }
 
-    public void setlName(String lName)
-    {
+    public void setlName(String lName) {
         this.lName = lName;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 

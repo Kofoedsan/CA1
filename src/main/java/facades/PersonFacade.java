@@ -47,9 +47,24 @@ public class PersonFacade implements IPersonFacade {
         address.setCityinfo(city);
         person.setAddress(address);
 
-        Phone phone = new Phone();
-        phone.setNumber(p.getDto_phone());
-        person.setPhone(phone);
+        List<Phone> phoneList = new ArrayList<>();
+
+        if (p.getDto_phones() != null) {
+            for (int i = 0; i < p.getDto_phones().size(); i++) {
+                Phone ph1 = (em.find(Phone.class, p.getDto_phones().get(i).getDto_number()));
+                System.out.println(ph1);
+                if (em.find(Phone.class, p.getDto_phones().get(i).getDto_number()) != null) {
+                    System.out.println("HEJ MED DIG :D ");
+                    Phone ph = (em.find(Phone.class, p.getDto_phones().get(i).getDto_number()));
+                    phoneList.add(ph);
+
+                }
+            }
+            person.setPhones(phoneList);
+        }
+
+//        phone.setNumber(p.getDto_phone());
+//        person.setPhone(phone);
 
         List<Hobby> hobbies = new ArrayList<>();
 
@@ -94,7 +109,7 @@ public class PersonFacade implements IPersonFacade {
         try {
             em.getTransaction().begin();
             em.remove(p);
-            em.remove(p.getPhone());
+            em.remove(p.getPhones());
             em.remove(p.getAddress());
             em.getTransaction().commit();
         } finally {

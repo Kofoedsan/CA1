@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Phone {
@@ -10,7 +11,7 @@ public class Phone {
     private int phone_id;
     private int number;
 
-    @OneToOne(mappedBy = "phone")
+    @ManyToOne
     private Person person;
 
 
