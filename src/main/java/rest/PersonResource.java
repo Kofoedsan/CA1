@@ -60,6 +60,8 @@ public class PersonResource
     public Response createPerson(String p)
     {
         PersonDTO personDTO = GSON.fromJson(p, PersonDTO.class);
+        System.out.println(personDTO);
+        System.out.println("HEJ");
         PersonDTO result = personFacade.addPerson(personDTO);
         return Response.ok().entity(GSON.toJson(result)).build();
     }

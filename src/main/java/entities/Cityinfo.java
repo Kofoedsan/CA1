@@ -13,7 +13,7 @@ public class Cityinfo implements Serializable {
     @Column(length=35)
     private String city;
 
-    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.PERSIST)
     private List<Address> addresses;
 
     public Cityinfo() {
