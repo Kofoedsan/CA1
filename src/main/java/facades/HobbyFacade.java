@@ -58,11 +58,4 @@ public class HobbyFacade implements IHobbyFacade {
     public HobbyDTO updateHobby(HobbyDTO hdto) {
         return null;
     }
-
-    @Override
-    public HobbiesDTO getPersonsWithHobby(int id) {
-        return null;
-    }
-
-
 }

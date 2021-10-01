@@ -7,8 +7,6 @@ import entities.Cityinfo;
 import entities.Person;
 import entities.Phone;
 import entities.*;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -64,15 +62,9 @@ public class PersonFacade implements IPersonFacade {
 
         person.setHobbies(hobbyList);
 
-
-
         try {
             em.getTransaction().begin();
-            try {
-                em.persist(person);
-            } catch (Exception e) {
-                em.merge(person);
-            }
+            em.persist(person);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -118,8 +110,7 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonsDTO getAllPersonsWithHobby(String name)
-    {
+    public PersonsDTO getAllPersonsWithHobby(String name) {
 
         EntityManager em = getEntityManager();
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.name = :name", Person.class);
