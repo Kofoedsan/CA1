@@ -9,9 +9,5 @@ public interface IHobbyFacade {
     HobbiesDTO getAllHobbies ();
     HobbyDTO removeHobby (int id);
     HobbyDTO updateHobby (HobbyDTO hdto);
-    HobbiesDTO getPersonsWithHobby (int id);
-
-
-
 
 }
