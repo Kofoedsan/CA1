@@ -17,7 +17,6 @@ public class PersonDTO{
     private int dto_zipCode;
     private String dto_street;
     private String dto_city;
-//    private List<Hobby> dto_hobbies = new ArrayList<>();
     private List<HobbyDTO> dto_hobbies;
 
     public static List<PersonDTO> getDtos(List<Person> lp) {

@@ -75,8 +75,7 @@ public class PersonResource
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response createPerson(String p)
-    {
+    public Response createPerson(String p) throws Exception {
         PersonDTO personDTO = GSON.fromJson(p, PersonDTO.class);
         PersonDTO result = personFacade.addPerson(personDTO);
         return Response.ok().entity(GSON.toJson(result)).build();

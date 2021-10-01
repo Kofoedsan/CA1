@@ -22,7 +22,7 @@ public class Person implements Serializable {
     private String email;
 
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Phone phone;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -6,7 +6,7 @@ import dtos.PersonsDTO;
 public interface IPersonFacade
 {
 
-    PersonDTO addPerson(PersonDTO p);
+    PersonDTO addPerson(PersonDTO p) throws Exception;
 
     PersonDTO deletePerson(int id);
 

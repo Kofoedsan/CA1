@@ -21,12 +21,12 @@ public class Phone {
         return person;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public int getPhone_id() {
+        return phone_id;
     }
 
-    public Phone(int number) {
-        this.number = number;
+    public void setPhone_id(int phone_id) {
+        this.phone_id = phone_id;
     }
 
     public int getNumber() {
@@ -37,12 +37,8 @@ public class Phone {
         this.number = number;
     }
 
-    public int getPhone_id() {
-        return phone_id;
-    }
-
-    public void setPhone_id(int phone_id) {
-        this.phone_id = phone_id;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

@@ -35,32 +35,35 @@ public class PersonFacade implements IPersonFacade {
 
 
     @Override
-    public PersonDTO addPerson(PersonDTO p) {
+    public PersonDTO addPerson(PersonDTO p) throws Exception {
         EntityManager em = emf.createEntityManager();
-
+//TODO Lav check for at se om personen eksistere på email & check on tlf eksistere.
         Person person = new Person();
         person.setfName(p.getDto_fName());
         person.setlName(p.getDto_lName());
         person.setEmail(p.getDto_email());
-        Phone phone = new Phone(p.getDto_phone());
         Cityinfo city = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
         Address address = new Address(p.getDto_street());
         address.setCityinfo(city);
-        person.setPhone(phone);
         person.setAddress(address);
+
+        Phone phone = new Phone();
+        phone.setNumber(p.getDto_phone());
+        person.setPhone(phone);
 
         List<Hobby> hobbies = new ArrayList<>();
 
-        for (int i = 0; i < p.getDto_hobbies().size(); i++) {
-            String name = p.getDto_hobbies().get(i).getDto_name();
-            String cat = p.getDto_hobbies().get(i).getDto_category();
-            String type = p.getDto_hobbies().get(i).getDto_type();
-            String wiki = p.getDto_hobbies().get(i).getDto_wikiLink();
-            Hobby hobby = new Hobby(name,cat,type,wiki);
-            hobbies.add(hobby);
+        if (p.getDto_hobbies() != null) {
+            for (int i = 0; i < p.getDto_hobbies().size(); i++) {
+                if (em.find(Hobby.class, p.getDto_hobbies().get(i).getDto_name()) != null) {
+                    Hobby h = (em.find(Hobby.class, p.getDto_hobbies().get(i).getDto_name()));
+                    hobbies.add(h);
+                }
+            }
+            person.setHobbies(hobbies);
+        } else {
+            throw new Exception();
         }
-
-        person.setHobbies(hobbies);
 
         try {
             em.getTransaction().begin();
