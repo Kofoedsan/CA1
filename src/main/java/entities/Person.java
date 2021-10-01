@@ -29,7 +29,7 @@ public class Person implements Serializable {
 
 
     @JoinColumn
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person() {

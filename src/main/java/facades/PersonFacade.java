@@ -56,11 +56,11 @@ public class PersonFacade implements IPersonFacade {
         person.setAddress(address);
         person.setPhone(phone);
 
-        Hobby hobby = new Hobby("navn1","Wiki1","Cat1","type2");
-        Hobby hobby1 = new Hobby("ad","Wiki1","Cat1","type2");
+//        Hobby hobby = new Hobby("navn1","Wiki1","Cat1","type2");
+//        Hobby hobby1 = new Hobby("ad","Wiki1","Cat1","type2");
 
         List<Hobby> hobbyList = new ArrayList<>();
-        hobbyList.add(hobby);
+//        hobbyList.add(hobby);
 
         person.setHobbies(hobbyList);
 

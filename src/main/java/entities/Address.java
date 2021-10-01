@@ -15,7 +15,7 @@ public class Address {
     private List<Person> persons;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Cityinfo cityinfo;
 
     public Address() {
