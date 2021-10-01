@@ -53,12 +53,21 @@ public class PersonResource
         System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
-
     @GET
-    @Path("allpersons, {name}")
+    @Path("allpwh/{name}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllPersonsWithHobby(@PathParam("name") String name){
         PersonsDTO persons = personFacade.getAllPersonsWithHobby(name);
+        System.out.println(persons);
+        return Response.ok().entity(GSON.toJson(persons)).build();
+    }
+
+
+    @GET
+    @Path("allpic/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersonsInCity(@PathParam("id") int id){
+        PersonsDTO persons = personFacade.getAllPersonsLivingInCity(id);
         System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();
     }

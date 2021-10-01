@@ -123,6 +123,7 @@ public class PersonFacade implements IPersonFacade {
 
         EntityManager em = getEntityManager();
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.name = :name", Person.class);
+        query.setParameter("name", name);
         List<Person> result = query.getResultList();
         System.out.println(result);
         return new PersonsDTO(result);
@@ -131,7 +132,15 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public PersonsDTO getAllPersonsLivingInCity(int id) {
-        return null;
+        {
+            EntityManager em = getEntityManager();
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address.cityinfo a WHERE a.zipCode = :id ", Person.class);
+            query.setParameter("id", id);
+            List<Person> result = query.getResultList();
+            System.out.println(result);
+            return new PersonsDTO(result);
+
+        }
     }
 
     @Override
