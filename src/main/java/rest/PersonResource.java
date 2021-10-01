@@ -54,6 +54,15 @@ public class PersonResource
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
 
+    @GET
+    @Path("allpersons, {name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersonsWithHobby(@PathParam("name") String name){
+        PersonsDTO persons = personFacade.getAllPersonsWithHobby(name);
+        System.out.println(persons);
+        return Response.ok().entity(GSON.toJson(persons)).build();
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})

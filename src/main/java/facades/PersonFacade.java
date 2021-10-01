@@ -1,9 +1,7 @@
 package facades;
 
-import dtos.CityinfoDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
-import dtos.PhoneDTO;
 import entities.Address;
 import entities.Cityinfo;
 import entities.Person;
@@ -124,9 +122,15 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonsDTO getAllPersonsWithHobby(int id)
+    public PersonsDTO getAllPersonsWithHobby(String name)
     {
-        return null;
+
+        EntityManager em = getEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.name = :name", Person.class);
+        List<Person> result = query.getResultList();
+        System.out.println(result);
+        return new PersonsDTO(result);
+
     }
 
     @Override

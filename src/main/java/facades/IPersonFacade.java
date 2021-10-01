@@ -16,7 +16,7 @@ public interface IPersonFacade
 
     PersonsDTO getAllPersons();
 
-    PersonsDTO getAllPersonsWithHobby(int id);
+    PersonsDTO getAllPersonsWithHobby(String name);
 
     PersonsDTO getAllPersonsLivingInCity(int id);
 

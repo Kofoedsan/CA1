@@ -14,7 +14,6 @@ public class Cityinfo implements Serializable {
     private String city;
 
 
-
     @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.PERSIST)
     private List<Address> addresses;
 
