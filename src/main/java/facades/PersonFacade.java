@@ -35,15 +35,6 @@ public class PersonFacade implements IPersonFacade {
         return emf.createEntityManager();
     }
 
-    public long getPersonCount() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            long renameMeCount = (long) em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
-            return renameMeCount;
-        } finally {
-            em.close();
-        }
-    }
 
     @Override
     public PersonDTO addPerson(PersonDTO p) {
@@ -56,11 +47,11 @@ public class PersonFacade implements IPersonFacade {
         person.setAddress(address);
         person.setPhone(phone);
 
-//        Hobby hobby = new Hobby("navn1","Wiki1","Cat1","type2");
-//        Hobby hobby1 = new Hobby("ad","Wiki1","Cat1","type2");
+//      Hobby hobby = new Hobby("navn1","Wiki1","Cat1","type2");
+//      Hobby hobby1 = new Hobby("ad","Wiki1","Cat1","type2");
 
         List<Hobby> hobbyList = new ArrayList<>();
-//        hobbyList.add(hobby);
+//      hobbyList.add(hobby);
 
         person.setHobbies(hobbyList);
 
@@ -78,6 +69,16 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
         return new PersonDTO(person);
+    }
+
+    public long getPersonCount() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            long renameMeCount = (long) em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
+            return renameMeCount;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -105,11 +106,6 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO updatePerson(PersonDTO p) {
-        return null;
-    }
-
-    @Override
     public PersonsDTO getAllPersons() {
         EntityManager em = getEntityManager();
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
@@ -132,7 +128,6 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public PersonsDTO getAllPersonsLivingInCity(int id) {
-        {
             EntityManager em = getEntityManager();
             TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address.cityinfo a WHERE a.zipCode = :id ", Person.class);
             query.setParameter("id", id);
@@ -140,11 +135,16 @@ public class PersonFacade implements IPersonFacade {
             System.out.println(result);
             return new PersonsDTO(result);
 
-        }
     }
+
 
     @Override
     public PersonsDTO getAllPhonesFromPersonWithHobby(int id) {
+        return null;
+    }
+
+    @Override
+    public PersonDTO updatePerson(PersonDTO p) {
         return null;
     }
 }
