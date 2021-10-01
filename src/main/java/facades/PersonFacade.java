@@ -1,9 +1,6 @@
 package facades;
 
-import dtos.AddressDTO;
-import dtos.CityinfoDTO;
-import dtos.PersonDTO;
-import dtos.PersonsDTO;
+import dtos.*;
 import entities.Address;
 import entities.Cityinfo;
 import entities.Person;
@@ -45,17 +42,25 @@ public class PersonFacade implements IPersonFacade {
         person.setfName(p.getDto_fName());
         person.setlName(p.getDto_lName());
         person.setEmail(p.getDto_email());
-
+        Phone phone = new Phone(p.getDto_phone());
         Cityinfo city = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
         Address address = new Address(p.getDto_street());
         address.setCityinfo(city);
+        person.setPhone(phone);
         person.setAddress(address);
 
-//        List<Hobby> h1 = new ArrayList<>();
-//        h1.add(new Hobby("te", "tes", "test", "lele"));
-//        person.setHobbies(h1);
-//
-//        Hobby h16 = em.find(Hobby.class,"NAME");
+        List<Hobby> hobbies = new ArrayList<>();
+
+        for (int i = 0; i < p.getDto_hobbies().size(); i++) {
+            String name = p.getDto_hobbies().get(i).getDto_name();
+            String cat = p.getDto_hobbies().get(i).getDto_category();
+            String type = p.getDto_hobbies().get(i).getDto_type();
+            String wiki = p.getDto_hobbies().get(i).getDto_wikiLink();
+            Hobby hobby = new Hobby(name,cat,type,wiki);
+            hobbies.add(hobby);
+        }
+
+        person.setHobbies(hobbies);
 
         try {
             em.getTransaction().begin();

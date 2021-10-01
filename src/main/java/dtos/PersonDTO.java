@@ -33,11 +33,11 @@ public class PersonDTO{
         this.dto_fName = p.getfName();
         this.dto_lName = p.getlName();
         this.dto_email = p.getEmail();
-//        this.dto_phone = p.getPhone().getNumber();
+        this.dto_phone = p.getPhone().getNumber();
         this.dto_street = p.getAddress().getStreet();
         this.dto_city = p.getAddress().getCityinfo().getCity();
         this.dto_zipCode = p.getAddress().getCityinfo().getZipCode();
-//        this.dto_hobbies = HobbyDTO.getDtos(p.getHobbies());
+        this.dto_hobbies = HobbyDTO.getDtos(p.getHobbies());
     }
 
     public PersonDTO (PersonDTO pDTO) {

@@ -29,7 +29,7 @@ public class Person implements Serializable {
     private Address address;
 
 
-    @JoinColumn
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Hobby> hobbies = new ArrayList<>();
 
@@ -51,7 +51,6 @@ public class Person implements Serializable {
     }
 
 
-
     public List<Hobby> getHobbies() {
         return hobbies;
     }
@@ -59,8 +58,6 @@ public class Person implements Serializable {
     public void setHobbies(List<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
-
-
 
     public Address getAddress() {
         return address;
