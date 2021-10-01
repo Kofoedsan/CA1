@@ -6,7 +6,6 @@ import entities.Cityinfo;
 import entities.Person;
 import entities.Phone;
 import entities.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -52,14 +51,11 @@ public class PersonFacade implements IPersonFacade {
                 if (em.find(Phone.class, p.getDto_phones().get(i).getDto_number()) != null) {
                     throw new Exception();
                 } else {
-                    Phone newPhone = new Phone();
                     List<Phone> phoneList= new ArrayList<>();
                     for (int j = 0; j < p.getDto_phones().size(); j++) {
-                        newPhone.setNumber(p.getDto_phones().get(i).getDto_number());
-                        newPhone.setPerson(person);
-                        phoneList.add(newPhone);
+                        Phone phone=new Phone(p.getDto_phones().get(j).getDto_number(),person);
+                        phoneList.add(phone);
                     }
-
                     person.setPhones(phoneList);
                 }
             }
