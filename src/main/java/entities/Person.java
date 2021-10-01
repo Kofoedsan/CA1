@@ -122,12 +122,14 @@ public class Person implements Serializable {
     }
 
     @Override
-    public String toString()
-    {
-        return getClass().getSimpleName() + "(" +
-                "person_id = " + person_id + ", " +
-                "fName = " + fName + ", " +
-                "lName = " + lName + ", " +
-                "email = " + email + ")";
+    public String toString() {
+        return "Person{" +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", address=" + address +
+                ", hobbies=" + hobbies +
+                '}';
     }
 }

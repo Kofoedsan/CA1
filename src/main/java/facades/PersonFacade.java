@@ -46,17 +46,16 @@ public class PersonFacade implements IPersonFacade {
         person.setlName(p.getDto_lName());
         person.setEmail(p.getDto_email());
 
-        Phone phone = new Phone(p.getDto_phone());
         Cityinfo city = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
         Address address = new Address(p.getDto_street());
         address.setCityinfo(city);
         person.setAddress(address);
-        person.setPhone(phone);
-        List<Hobby> h1 = new ArrayList<>();
-        h1.add(new Hobby("te", "tes", "test", "lele"));
-        person.setHobbies(h1);
 
-        Hobby h16 = em.find(Hobby.class,"NAME");
+//        List<Hobby> h1 = new ArrayList<>();
+//        h1.add(new Hobby("te", "tes", "test", "lele"));
+//        person.setHobbies(h1);
+//
+//        Hobby h16 = em.find(Hobby.class,"NAME");
 
         try {
             em.getTransaction().begin();
