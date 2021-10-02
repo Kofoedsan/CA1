@@ -55,7 +55,6 @@ public class PersonResource
     }
 
 
-
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
