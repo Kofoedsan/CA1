@@ -39,12 +39,8 @@ public class PersonResource {
     }
 
     @Operation(summary = "Total persons amount",
-            tags = {"Total person count"},
-            responses = {
-                    @ApiResponse(
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
-                    @ApiResponse(responseCode = "200", description = "Total person amount"),
-                    @ApiResponse(responseCode = "400", description = "Entity not found")})
+            tags = {"Total person count"}
+           )
 
     @Path("count")
     @GET
