@@ -25,6 +25,7 @@ public class Person implements Serializable {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List <Phone> phone;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
 

@@ -102,7 +102,6 @@ public class PersonFacade implements IPersonFacade {
     public PersonDTO deletePerson(int id) {
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
-        System.out.println(p.toString());
 
 //        if (p == null)
 //            throw new PersonException(404, "Could not delete person with: " + id + " bacause it does not exist");

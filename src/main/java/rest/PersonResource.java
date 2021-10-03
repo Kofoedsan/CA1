@@ -7,7 +7,6 @@ import dtos.PersonsDTO;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,25 +21,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-@OpenAPIDefinition(
-        info = @Info(
-                title = "CA1 API dokument",
-                description = "API endpoints & dokumentation"),
-        servers = {
-                @Server(
-                        description = "For Local host testing",
-                        url = "http://localhost:8080/CA1_war_exploded"
-                )
 
-        }
-)
 
 @Path("person")
 public class PersonResource {
 
-    @Hidden private final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    @Hidden private final PersonFacade personFacade = PersonFacade.getPersonFacadeMethods(EMF);
-    @Hidden private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+     private final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+     private final PersonFacade personFacade = PersonFacade.getPersonFacadeMethods(EMF);
+     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
 
     @Hidden
@@ -51,7 +39,7 @@ public class PersonResource {
     }
 
     @Operation(summary = "Total persons amount",
-            tags = {"totalP"},
+            tags = {"Total person count"},
             responses = {
                     @ApiResponse(
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
