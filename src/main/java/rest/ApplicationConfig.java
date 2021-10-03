@@ -18,6 +18,10 @@ import javax.ws.rs.core.Application;
                 @Server(
                         description = "Droplet URL",
                         url = "https://kofoednet.systems/CA1"
+                ),
+                @Server(
+                        description = "Local URL",
+                        url = "http://localhost:8080/CA1_war_exploded/"
                 )
 
         }
