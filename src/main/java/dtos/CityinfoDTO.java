@@ -1,9 +1,12 @@
 package dtos;
 
 import entities.Cityinfo;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "CityinfoDTO")
 public class CityinfoDTO {
 
     private int dto_zipCode;

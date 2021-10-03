@@ -1,5 +1,8 @@
 package rest;
 
+import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
+import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
+
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
@@ -9,6 +12,8 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
+        resources.add(OpenApiResource.class);
+        resources.add(AcceptHeaderOpenApiResource.class);
         addRestResourceClasses(resources);
         return resources;
     }

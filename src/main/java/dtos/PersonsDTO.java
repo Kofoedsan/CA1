@@ -1,10 +1,12 @@
 package dtos;
 
 import entities.Person;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "PersonsDTO")
 public class PersonsDTO {
 
     List<PersonDTO> all = new ArrayList();

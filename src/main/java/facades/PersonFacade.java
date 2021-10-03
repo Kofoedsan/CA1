@@ -101,13 +101,13 @@ public class PersonFacade implements IPersonFacade {
     public PersonDTO deletePerson(int id) {
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
+        System.out.println(p.toString());
 //        if (p == null)
 //            throw new PersonException(404, "Could not delete person with: " + id + " bacause it does not exist");
         try {
             em.getTransaction().begin();
-            em.remove(p);
-            em.remove(p.getPhones());
-            em.remove(p.getAddress());
+           em.remove(p.getPhones().remove(0));
+           em.remove(p.getHobbies().remove(0));
             em.getTransaction().commit();
         } finally {
             em.close();

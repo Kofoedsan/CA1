@@ -1,10 +1,12 @@
 package dtos;
 
 import entities.Address;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "AddressDTO")
 public class AddressDTO {
 
     private int dto_a_id;

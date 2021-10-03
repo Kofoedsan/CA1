@@ -3,11 +3,13 @@ package dtos;
 import entities.Address;
 import entities.Person;
 import entities.Phone;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Schema(name = "PhoneDTO")
 public class PhoneDTO {
 
 //    private int dto_phone_id;

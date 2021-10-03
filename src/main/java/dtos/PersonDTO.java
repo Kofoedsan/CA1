@@ -1,11 +1,13 @@
 package dtos;
 
 import entities.Person;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Schema(name = "PersonDTO")
 public class PersonDTO{
     private int dto_id;
     private String dto_fName;

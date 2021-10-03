@@ -2,10 +2,12 @@ package dtos;
 
 import entities.Address;
 import entities.Hobby;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "HobbyDTO")
 public class HobbyDTO {
 
     private String dto_name;
