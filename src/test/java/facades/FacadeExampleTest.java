@@ -57,7 +57,7 @@ public class FacadeExampleTest
         p1.setAddress(address1);
 
         p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
-        Cityinfo city2 = new Cityinfo(180, "Kaldbak");
+        Cityinfo city2 = new Cityinfo(180, "Kaldbak");//
         Address address2 = new Address("SortePerVej 8");
         address2.setCityinfo(city2);
         p2.setAddress(address2);
