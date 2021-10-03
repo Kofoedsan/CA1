@@ -6,6 +6,7 @@ import entities.Cityinfo;
 import entities.Person;
 import entities.Phone;
 import entities.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -51,9 +52,9 @@ public class PersonFacade implements IPersonFacade {
                 if (em.find(Phone.class, p.getDto_phones().get(i).getDto_number()) != null) {
                     throw new Exception();
                 } else {
-                    List<Phone> phoneList= new ArrayList<>();
+                    List<Phone> phoneList = new ArrayList<>();
                     for (int j = 0; j < p.getDto_phones().size(); j++) {
-                        Phone phone=new Phone(p.getDto_phones().get(j).getDto_number(),person);
+                        Phone phone = new Phone(p.getDto_phones().get(j).getDto_number(), person);
                         phoneList.add(phone);
                     }
                     person.setPhones(phoneList);
@@ -106,8 +107,9 @@ public class PersonFacade implements IPersonFacade {
 //            throw new PersonException(404, "Could not delete person with: " + id + " bacause it does not exist");
         try {
             em.getTransaction().begin();
-           em.remove(p.getPhones().remove(0));
-           em.remove(p.getHobbies().remove(0));
+            em.remove(p.getPhones().remove(0));
+            em.remove(p.getAddress());
+            em.remove(p);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -172,7 +174,6 @@ public class PersonFacade implements IPersonFacade {
         return new PersonDTO(person);
 
     }
-
 
 
 }

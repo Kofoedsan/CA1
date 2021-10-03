@@ -22,15 +22,19 @@ public class Person implements Serializable {
     private String email;
 
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List <Phone> phone;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Hobby> hobbies = new ArrayList<>();
+
+    public List<Phone> getPhone() {
+        return phone;
+    }
 
     public Person() {
     }

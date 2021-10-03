@@ -10,7 +10,7 @@ public class Phone {
 //    private int phone_id;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Person person;
 
 
