@@ -32,6 +32,15 @@
 //    {
 //    }
 //
+//
+//    // Setup the DataBase in a known state BEFORE EACH TEST
+//
+//
+//    @AfterEach
+//    public void tearDown() {
+////        Remove any data after each test was run
+//    }
+//
 //    @BeforeAll
 //    public static void setUpClass()
 //    {
