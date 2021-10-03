@@ -26,7 +26,7 @@ public class Person implements Serializable {
     private List <Phone> phone;
 
     @JoinColumn(nullable = false)
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private Address address;
 
 

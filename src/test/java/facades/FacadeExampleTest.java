@@ -5,9 +5,12 @@ import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,36 +20,43 @@ import java.util.List;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class FacadeExampleTest {
+public class FacadeExampleTest
+{
 
     private static EntityManagerFactory emf;
     private static PersonFacade facade;
+    Person p1;
+    Person p2;
 
-    public FacadeExampleTest() {
+    public FacadeExampleTest()
+    {
     }
 
     @BeforeAll
-    public static void setUpClass() {
-       emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = PersonFacade.getPersonFacadeMethods(emf);
+    public static void setUpClass()
+    {
+        emf = EMF_Creator.createEntityManagerFactoryForTest();
+        facade = PersonFacade.getPersonFacadeMethods(emf);
     }
 
     @AfterAll
-    public static void tearDownClass() {
+    public static void tearDownClass()
+    {
 //        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
     }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
     @BeforeEach
-    public void setUp() {
+    public void setUp()
+    {
         EntityManager em = emf.createEntityManager();
-        Person p1 = new Person("Førstenavn1", "Sidstenavn1", "Email1");
+        p1 = new Person("Førstenavn1", "Sidstenavn1", "Email1");
         Cityinfo city1 = new Cityinfo(3700, "Rønne");
         Address address1 = new Address("Kaldbakgade 8");
         address1.setCityinfo(city1);
         p1.setAddress(address1);
 
-        Person p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
+        p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
         Cityinfo city2 = new Cityinfo(180, "Kaldbak");
         Address address2 = new Address("SortePerVej 8");
         address2.setCityinfo(city2);
@@ -72,7 +82,8 @@ public class FacadeExampleTest {
         testPhone2.add(phone2);
         p2.setPhones(testPhone2);
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.createNativeQuery("DELETE from PERSON_PHONE").executeUpdate();
             em.createNativeQuery("DELETE from PERSON_HOBBY").executeUpdate();
@@ -82,7 +93,8 @@ public class FacadeExampleTest {
             em.persist(p1);
             em.persist(p2);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
@@ -93,8 +105,25 @@ public class FacadeExampleTest {
 //    }
 
     @Test
-    public void testAFacadeMethod() throws Exception {
+    public void testAFacadeMethod() throws Exception
+    {
         assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
+    }
+
+    @Test
+    void getPerson()
+    {
+        int expected = p1.getPerson_id();
+        int actual = facade.getPerson(p1.getPerson_id()).getDto_id();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void deletePerson()
+    {
+        int expected = p2.getPerson_id();
+        int actual = facade.deletePerson(p2.getPerson_id()).getDto_id();
+        assertEquals(expected, actual);
     }
 
 
