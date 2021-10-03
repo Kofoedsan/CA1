@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -37,11 +38,12 @@ import javax.ws.rs.core.Response;
 @Path("person")
 public class PersonResource {
 
-    private final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private final PersonFacade personFacade = PersonFacade.getPersonFacadeMethods(EMF);
-    private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    @Hidden private final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    @Hidden private final PersonFacade personFacade = PersonFacade.getPersonFacadeMethods(EMF);
+    @Hidden private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
 
+    @Hidden
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -151,6 +153,13 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
 
+    @Operation(summary = "Create person",
+            tags = {"Create a new person"},
+            responses = {
+                    @ApiResponse(
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "Create person"),
+                    @ApiResponse(responseCode = "400", description = "Entity not found")})
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
@@ -169,7 +178,6 @@ public class PersonResource {
             }
     )
 
-
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -177,6 +185,4 @@ public class PersonResource {
         PersonDTO result = personFacade.deletePerson(id);
         return Response.ok().entity(GSON.toJson(result)).build();
     }
-
-
 }
