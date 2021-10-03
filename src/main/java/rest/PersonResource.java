@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
         servers = {
                 @Server(
                         description = "For Local host testing",
-                        url = "http://localhost:8080/sem3openapi"
+                        url = "http://localhost:8080/CA1_war_exploded"
                 )
 
         }
