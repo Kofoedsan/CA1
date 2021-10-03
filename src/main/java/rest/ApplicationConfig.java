@@ -16,10 +16,6 @@ import javax.ws.rs.core.Application;
                 description = "API endpoints & dokumentation"),
         servers = {
                 @Server(
-                        description = "For Local host testing",
-                        url = "http://localhost:8080/CA1_war_exploded"
-                ),
-                @Server(
                         description = "Droplet URL",
                         url = "https://kofoednet.systems/CA1/"
                 )
