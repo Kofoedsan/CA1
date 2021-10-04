@@ -169,4 +169,17 @@ public class PersonResource {
         PersonDTO result = personFacade.deletePerson(id);
         return Response.ok().entity(GSON.toJson(result)).build();
     }
+
+    @PUT
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response update(@PathParam("id") int id, String p) throws Exception
+    {
+        PersonDTO personDTO = GSON.fromJson(p, PersonDTO.class);
+        personDTO.setDto_id(id);
+        PersonDTO result = personFacade.updatePerson(personDTO);
+        return Response.ok().entity(GSON.toJson(result)).build();
+    }
+
 }
