@@ -9,8 +9,10 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class PersonFacade implements IPersonFacade
@@ -203,13 +205,17 @@ public class PersonFacade implements IPersonFacade
         person.setEmail(p.getDto_email());
 
 
+
         Address address = new Address(p.getDto_street());
+        System.out.println(address.getStreet());
         Cityinfo cityinfo = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
         address.setCityinfo(cityinfo);
         person.setAddress(address);
 
+
+
         List<Phone> phoneList = new ArrayList<>();
-em.remove(address);
+
         for (int i = 0; i < p.getDto_phones().size(); i++)
         {
             int nr =  p.getDto_phones().get(i).getDto_number();
@@ -235,6 +241,7 @@ em.remove(address);
             em.getTransaction().commit();
         } finally
         {
+
             em.close();
         }
         return new PersonDTO(p);
