@@ -201,46 +201,38 @@ public class PersonFacade implements IPersonFacade
         person.setfName(p.getDto_fName());
         person.setlName(p.getDto_lName());
         person.setEmail(p.getDto_email());
+
+
         Address address = new Address(p.getDto_street());
         Cityinfo cityinfo = new Cityinfo(p.getDto_zipCode(), p.getDto_city());
+        address.setCityinfo(cityinfo);
+        person.setAddress(address);
 
         List<Phone> phoneList = new ArrayList<>();
-
+em.remove(address);
         for (int i = 0; i < p.getDto_phones().size(); i++)
         {
-            Phone phone = em.find(Phone.class, p.getDto_phones().get(i).getDto_number());
-            System.out.println(" kig her " + p.getDto_phones().get(i).getDto_number());
-            int test =  p.getDto_phones().get(i).getDto_number();
-            System.out.println(test);
-            phone.setNumber(test);
+            int nr =  p.getDto_phones().get(i).getDto_number();
+            Phone phone = new Phone(nr, person);
             phoneList.add(phone);
-//            Phone phone = new Phone(p.getDto_phones().get(i).getDto_number(), person);
-//            phone.setNumber(phone);
-
         }
+        person.setPhones(phoneList);
 
 
         List<Hobby> hobbyList = new ArrayList<>();
-
         for (int i = 0; i < p.getDto_hobbies().size(); i++)
         {
             Hobby hobby = em.find(Hobby.class, p.getDto_hobbies().get(i).getDto_name());
             hobby.setName(p.getDto_hobbies().get(i).getDto_name());
             hobbyList.add(hobby);
         }
-
-//        person.setHobbies(p.getDto_hobbies().getDto_name(), p.getDto_hobbies().get(i).getDto_wikiLink(), p.getDto_hobbies().get(i).getDto_category(), p.getDto_hobbies().get(i).getDto_type());
+        person.setHobbies(hobbyList);
 
         try
         {
             em.getTransaction().begin();
-            address.setCityinfo(cityinfo);
-            person.setAddress(address);
-            person.setHobbies(hobbyList);
-            person.setPhones(phoneList);
             em.merge(person);
             em.getTransaction().commit();
-
         } finally
         {
             em.close();
