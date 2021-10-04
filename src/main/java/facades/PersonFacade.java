@@ -6,6 +6,7 @@ import entities.Cityinfo;
 import entities.Person;
 import entities.Phone;
 import entities.*;
+import errorhandling.PersonException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,13 +123,13 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO deletePerson(int id)
+    public PersonDTO deletePerson(int id) throws PersonException
     {
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
 
-//        if (p == null)
-//            throw new PersonException(404, "Could not delete person with: " + id + " bacause it does not exist");
+        if (p == null)
+            throw new PersonException(404, "Could not delete person with id: " + id + " bacause the person does not exist");
         try
         {
             em.getTransaction().begin();
@@ -148,10 +149,17 @@ public class PersonFacade implements IPersonFacade
     }
 
     @Override
-    public PersonDTO getPerson(int id)
+    public PersonDTO getPerson(int id) throws PersonException
     {
+
         EntityManager em = emf.createEntityManager();
+        System.out.println("Kig HER" + id);
+        if (em.find(Person.class, id ) == null)
+        {
+            throw new PersonException(404, "Could not find person with id: " + id + " bacause the person does not exist");
+        }
         return new PersonDTO(em.find(Person.class, id));
+
     }
 
     @Override

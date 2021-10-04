@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
+import errorhandling.PersonException;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,7 +64,8 @@ public class PersonResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getById(@PathParam("id") int id) {
+    public Response getById(@PathParam("id") int id) throws PersonException
+    {
         PersonDTO pdID = personFacade.getPerson(id);
         return Response.ok().entity(GSON.toJson(pdID)).build();
     }
@@ -165,7 +167,8 @@ public class PersonResource {
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response delete(@PathParam("id") int id) {
+    public Response delete(@PathParam("id") int id) throws PersonException
+    {
         PersonDTO result = personFacade.deletePerson(id);
         return Response.ok().entity(GSON.toJson(result)).build();
     }

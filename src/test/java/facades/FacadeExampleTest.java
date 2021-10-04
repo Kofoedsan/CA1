@@ -1,6 +1,7 @@
 package facades;
 
 import entities.*;
+import errorhandling.PersonException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -120,7 +121,7 @@ public class FacadeExampleTest
     }
 
     @Test
-    void getPerson()
+    void getPerson() throws PersonException
     {
         int expected = p1.getPerson_id();
         int actual = facade.getPerson(p1.getPerson_id()).getDto_id();
@@ -128,7 +129,7 @@ public class FacadeExampleTest
     }
 
     @Test
-    void deletePerson()
+    void deletePerson() throws PersonException
     {
         int expected = p2.getPerson_id();
         int actual = facade.deletePerson(p2.getPerson_id()).getDto_id();
