@@ -247,7 +247,6 @@ public class PersonResourceTest
                 .body("count", equalTo(450));
     }
 
-
     @Test
     public void testEndPoints() throws Exception
     {

@@ -127,7 +127,7 @@ public class PersonResource {
                     @ApiResponse(responseCode = "200", description = "All persons in city"),
                     @ApiResponse(responseCode = "400", description = "Entity not found")})
     @GET
-    @Path("allpic/{id}")
+    @Path("allpic/{id}") // id==zipCode
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllPersonsInCity(@PathParam("id") int id) throws PersonException {
         PersonsDTO persons = personFacade.getAllPersonsLivingInCity(id);
