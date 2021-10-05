@@ -183,9 +183,9 @@ public class PersonFacade implements IPersonFacade {
         Address newadr = em.find(Address.class, person.getAddress().getA_id());
         newadr.setStreet(p.getDto_street());
 
-        Cityinfo cty = em.find(Cityinfo.class, person.getAddress().getCityinfo().getZipCode());
+//         cty = em.find(Cityinfo.class, person.getAddress().getCityinfo().getZipCode());
 
-        cty = new Cityinfo(p.getDto_zipCode(),p.getDto_city());
+        Cityinfo cty = new Cityinfo(p.getDto_zipCode(),p.getDto_city());
         newadr.setCityinfo(cty);
         person.setAddress(newadr);
 
@@ -211,7 +211,6 @@ public class PersonFacade implements IPersonFacade {
         try {
             em.getTransaction().begin();
             em.merge(person);
-            em.merge(newadr);
             em.getTransaction().commit();
         } finally {
 
