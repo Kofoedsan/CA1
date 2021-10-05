@@ -6,16 +6,12 @@ import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import errorhandling.PersonException;
 import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.servers.Server;
 import utils.EMF_Creator;
 import facades.PersonFacade;
-
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -82,7 +78,7 @@ public class PersonResource {
     @GET
     @Path("phone/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getByPhone(@PathParam("id") int id) {
+    public Response getByPhone(@PathParam("id") int id) throws PersonException {
         PersonDTO pdID = personFacade.getPersonByPhone(id);
         return Response.ok().entity(GSON.toJson(pdID)).build();
     }
@@ -116,7 +112,7 @@ public class PersonResource {
     @GET
     @Path("allpwh/{name}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getAllPersonsWithHobby(@PathParam("name") String name) {
+    public Response getAllPersonsWithHobby(@PathParam("name") String name) throws PersonException {
         PersonsDTO persons = personFacade.getAllPersonsWithHobby(name);
         System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();
@@ -133,7 +129,7 @@ public class PersonResource {
     @GET
     @Path("allpic/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getAllPersonsInCity(@PathParam("id") int id) {
+    public Response getAllPersonsInCity(@PathParam("id") int id) throws PersonException {
         PersonsDTO persons = personFacade.getAllPersonsLivingInCity(id);
         System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();

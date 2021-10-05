@@ -13,13 +13,13 @@ public interface IPersonFacade
 
     PersonDTO getPerson(int id) throws PersonException;
 
-    PersonDTO updatePerson(PersonDTO p);
+    PersonDTO updatePerson(PersonDTO p) throws PersonException;
 
     PersonsDTO getAllPersons();
 
-    PersonsDTO getAllPersonsWithHobby(String name);
+    PersonsDTO getAllPersonsWithHobby(String name) throws PersonException;
 
-    PersonsDTO getAllPersonsLivingInCity(int id);
+    PersonsDTO getAllPersonsLivingInCity(int id) throws PersonException;
 
     PersonsDTO getAllPhonesFromPersonWithHobby(int id);
 
