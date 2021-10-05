@@ -168,6 +168,14 @@ public class PersonResource {
         PersonDTO result = personFacade.deletePerson(id);
         return Response.ok().entity(GSON.toJson(result)).build();
     }
+    @Operation(summary = "Update person",
+            tags = {"Update a person"},
+            responses = {
+                    @ApiResponse(
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "Updated person"),
+                    @ApiResponse(responseCode = "400", description = "Entity not found")})
+
 
     @PUT
     @Path("{id}")

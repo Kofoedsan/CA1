@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.PersonDTO;
 import entities.*;
 import errorhandling.PersonException;
 import utils.EMF_Creator;
@@ -135,7 +136,5 @@ public class FacadeExampleTest
         int actual = facade.deletePerson(p2.getPerson_id()).getDto_id();
         assertEquals(expected, actual);
     }
-
-
 }
 
