@@ -43,7 +43,15 @@ public class PersonResourceTest
     Person p1;
     Person p2;
     Cityinfo city1;
+    Cityinfo city2;
     Address address1;
+    Address address2;
+
+    Hobby h1;
+    Hobby h2;
+
+    Phone phone1;
+    Phone phone2;
 
     static HttpServer startServer()
     {
@@ -88,28 +96,28 @@ public class PersonResourceTest
         p1.setAddress(address1);
 
         p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
-        Cityinfo city2 = new Cityinfo(180, "Kaldbak");
-        Address address2 = new Address("SortePerVej 8");
+        city2 = new Cityinfo(180, "Kaldbak");
+        address2 = new Address("SortePerVej 8");
         address2.setCityinfo(city2);
         p2.setAddress(address2);
 
         List<Hobby> testhobby1 = new ArrayList<>();
-        Hobby h1 = (em.find(Hobby.class, "Action figur"));
+        h1 = (em.find(Hobby.class, "Action figur"));
         testhobby1.add(h1);
         p1.setHobbies(testhobby1);
 
         List<Hobby> testhobby2 = new ArrayList<>();
-        Hobby h2 = (em.find(Hobby.class, "Stand-up"));
+        h2 = (em.find(Hobby.class, "Stand-up"));
         testhobby2.add(h2);
         p2.setHobbies(testhobby2);
 
         List<Phone> testPhone1 = new ArrayList<>();
-        Phone phone1 = new Phone(1111, p1);
+        phone1 = new Phone(1111, p1);
         testPhone1.add(phone1);
         p1.setPhones(testPhone1);
 
         List<Phone> testPhone2 = new ArrayList<>();
-        Phone phone2 = new Phone(2222, p2);
+        phone2 = new Phone(2222, p2);
         testPhone2.add(phone2);
         p2.setPhones(testPhone2);
 
@@ -181,9 +189,66 @@ public class PersonResourceTest
                 .get("/person/allpic/" + address1.getCityinfo().getZipCode()).then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("allpic", hasSize(1));
+                .body("all", hasSize(1));
     }
 
+
+    @Test
+    public void getAllPWH()
+    {
+        given().contentType(MediaType.APPLICATION_JSON)
+                .get("/person/allpwh/" + h1.getName())
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("all", hasSize(1));
+    }
+
+
+    @Test
+    public void getPerson()
+    {
+        given().contentType(MediaType.APPLICATION_JSON)
+                .get("/person/" + p1.getPerson_id())
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("dto_fName", equalTo("Førstenavn1"))
+                .body("dto_lName", equalTo("Sidstenavn1"))
+                .body("dto_email", equalTo("Email1"))
+//                .body("dto_phones",   equalTo("[{dto_number=1111, dto_person=1}]"))
+                .body("dto_zipCode", equalTo(3700))
+                .body("dto_street", equalTo("Kaldbakgade 8"))
+                .body("dto_city", equalTo("Rønne"));
+//                .body("dto_name", equalTo("Action figur"));
+    }
+
+//    @Test
+//    public void getPersonByPhone()
+//    {
+//        given()
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .get("person/phone" + p2.getPhone().get(0).getNumber())
+//                .then()
+//                .assertThat()
+//                .statusCode(HttpStatus.OK_200.getStatusCode())
+//                .body("dto_id", equalTo(p2.getPerson_id()));
+//    }
+
+
+    @Test
+    public void testEndPoints() throws Exception
+    {
+        given().when().get("/person").then().statusCode(200);
+        given().when().get("/person/count").then().statusCode(200);
+        given().when().get("/person/all").then().statusCode(200);
+        given().when().get("/person/phone/1111").then().statusCode(200);
+        given().when().get("/person/allpwh/Action figur").then().statusCode(200);
+        given().when().get("/person/allpic/3700").then().statusCode(200);
+        given().when().get("/hobby/").then().statusCode(200);
+        given().when().get("/hobby/all").then().statusCode(200);
+
+    }
 }
 
 

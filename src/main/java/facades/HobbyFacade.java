@@ -30,8 +30,8 @@ public class HobbyFacade implements IHobbyFacade {
     public long hobbyAmount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
-            return renameMeCount;
+            long hobbyCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
+            return hobbyCount;
         }finally{
             em.close();
         }

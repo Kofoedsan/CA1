@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package errorhandling;
 
 import com.google.gson.Gson;
@@ -31,8 +26,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable>
         Logger.getLogger(GenericExceptionMapper.class.getName()).log(Level.SEVERE, null, ex);
         Response.StatusType type = getStatusType(ex);
         ExceptionDTO err;
-        if (ex instanceof PersonException)
-        {
+        if (ex instanceof PersonException) {
             statusCode = ((PersonException) ex).getCode();
             err = new ExceptionDTO(statusCode, ex.getMessage());
         } else if (ex instanceof RuntimeException)

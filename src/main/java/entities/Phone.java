@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @NamedQuery(name = "Phone.deleteAllRows", query = "DELETE from Phone")
@@ -53,5 +54,20 @@ public class Phone {
 //                "phone_id=" + phone_id +
                 ", number=" + number +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(number, phone.number);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 0;
     }
 }
