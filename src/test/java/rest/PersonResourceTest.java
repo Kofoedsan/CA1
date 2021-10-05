@@ -223,17 +223,17 @@ public class PersonResourceTest
 //                .body("dto_name", equalTo("Action figur"));
     }
 
-//    @Test
-//    public void getPersonByPhone()
-//    {
-//        given()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .get("person/phone" + p2.getPhone().get(0).getNumber())
-//                .then()
-//                .assertThat()
-//                .statusCode(HttpStatus.OK_200.getStatusCode())
-//                .body("dto_id", equalTo(p2.getPerson_id()));
-//    }
+    @Test
+    public void getPersonByPhone()
+    {
+        given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .get("person/phone/" + phone2.getNumber())
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("dto_id", equalTo(p2.getPerson_id()));
+    }
 
 
     @Test
