@@ -1,17 +1,14 @@
 package errorhandling;
 
-public class PersonException extends Exception
-{
+public class PersonException extends Exception {
     int code;
 
-    public PersonException(int code, String message)
-    {
+    public PersonException(int code, String message) {
         super(message);
         this.code = code;
     }
 
-    public int getCode()
-    {
+    public int getCode() {
         return code;
     }
 

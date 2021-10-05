@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -29,11 +30,11 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable>
         if (ex instanceof PersonException) {
             statusCode = ((PersonException) ex).getCode();
             err = new ExceptionDTO(statusCode, ex.getMessage());
-        } else if (ex instanceof RuntimeException)
-        {
+        } else if (ex instanceof NotAllowedException) {
+            err = new ExceptionDTO(404,"URL ikke fundet. Prøs venligst igen");
+        } else if (ex instanceof RuntimeException) {
             err = new ExceptionDTO(500, "Internal Server Problem. We are sorry for the inconvenience");
-        } else
-        {
+        }else{
             err = new ExceptionDTO(type.getStatusCode(), type.getReasonPhrase());
         }
         return Response.status(type.getStatusCode())
@@ -42,14 +43,11 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable>
                 build();
     }
 
-    private Response.StatusType getStatusType(Throwable ex)
-    {
-        if (ex instanceof WebApplicationException)
-        {
+    private Response.StatusType getStatusType(Throwable ex) {
+        if (ex instanceof WebApplicationException) {
             return ((WebApplicationException) ex).getResponse().getStatusInfo();
         }
         return Response.Status.INTERNAL_SERVER_ERROR;
-
     }
 
 }
