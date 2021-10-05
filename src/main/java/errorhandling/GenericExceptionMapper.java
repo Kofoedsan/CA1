@@ -31,7 +31,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable>
             statusCode = ((PersonException) ex).getCode();
             err = new ExceptionDTO(statusCode, ex.getMessage());
         } else if (ex instanceof NotAllowedException) {
-            err = new ExceptionDTO(404,"URL ikke fundet. Prøs venligst igen");
+            err = new ExceptionDTO(404,"Forkert URL. Tjek din venligts din URL syntax");
         } else if (ex instanceof RuntimeException) {
             err = new ExceptionDTO(500, "Internal Server Problem. We are sorry for the inconvenience");
         }else{
