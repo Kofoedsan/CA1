@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -21,6 +22,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,7 +31,8 @@ import org.junit.jupiter.api.Test;
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
 
-public class PersonResourceTest {
+public class PersonResourceTest
+{
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
@@ -37,14 +40,20 @@ public class PersonResourceTest {
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
+    Person p1;
+    Person p2;
+    Cityinfo city1;
+    Address address1;
 
-    static HttpServer startServer() {
+    static HttpServer startServer()
+    {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
         return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
     }
 
     @BeforeAll
-    public static void setUpClass() {
+    public static void setUpClass()
+    {
         //This method must be called before you request the EntityManagerFactory
         EMF_Creator.startREST_TestWithDB();
         emf = EMF_Creator.createEntityManagerFactoryForTest();
@@ -57,7 +66,8 @@ public class PersonResourceTest {
     }
 
     @AfterAll
-    public static void closeTestServer() {
+    public static void closeTestServer()
+    {
         //System.in.read();
 
         //Don't forget this, if you called its counterpart in @BeforeAll
@@ -68,15 +78,16 @@ public class PersonResourceTest {
     // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the EntityClass used below to use YOUR OWN (renamed) Entity class
     @BeforeEach
-    public void setUp() {
+    public void setUp()
+    {
         EntityManager em = emf.createEntityManager();
-        Person p1 = new Person("Førstenavn1", "Sidstenavn1", "Email1");
-        Cityinfo city1 = new Cityinfo(3700, "Rønne");
-        Address address1 = new Address("Kaldbakgade 8");
+        p1 = new Person("Førstenavn1", "Sidstenavn1", "Email1");
+        city1 = new Cityinfo(3700, "Rønne");
+        address1 = new Address("Kaldbakgade 8");
         address1.setCityinfo(city1);
         p1.setAddress(address1);
 
-        Person p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
+        p2 = new Person("Førstenavn2", "Sidstenavn2", "Email2");
         Cityinfo city2 = new Cityinfo(180, "Kaldbak");
         Address address2 = new Address("SortePerVej 8");
         address2.setCityinfo(city2);
@@ -102,7 +113,8 @@ public class PersonResourceTest {
         testPhone2.add(phone2);
         p2.setPhones(testPhone2);
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.createNativeQuery("DELETE from PERSON_PHONE").executeUpdate();
             em.createNativeQuery("DELETE from PERSON_HOBBY").executeUpdate();
@@ -112,20 +124,23 @@ public class PersonResourceTest {
             em.persist(p1);
             em.persist(p2);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Test
-    public void testServerIsUp() {
+    public void testServerIsUp()
+    {
         System.out.println("Testing is server UP");
         given().when().get("/person").then().statusCode(200);
     }
 
     //This test assumes the database contains two rows
     @Test
-    public void testDummyMsg() throws Exception {
+    public void testDummyMsg() throws Exception
+    {
         given()
                 .contentType("application/json")
                 .get("/person/").then()
@@ -135,7 +150,8 @@ public class PersonResourceTest {
     }
 
     @Test
-    public void testCount() throws Exception {
+    public void testCount() throws Exception
+    {
         given()
                 .contentType("application/json")
                 .get("/person/count").then()
@@ -143,5 +159,32 @@ public class PersonResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("count", equalTo(2));
     }
+
+
+    @Test
+    public void getAll()
+    {
+        given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .get("/person/all")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("all", hasSize(2));
+    }
+
+    @Test
+    public void getAllPIC()
+    {
+        given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .get("/person/allpic/" + address1.getCityinfo().getZipCode()).then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("allpic", hasSize(1));
+    }
+
 }
+
+
 
