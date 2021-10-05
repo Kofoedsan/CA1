@@ -143,5 +143,18 @@ public class PersonResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("count", equalTo(2));
     }
+
+    @Test
+    public void testEndPoints() throws Exception {
+        given().when().get("/person").then().statusCode(200);
+        given().when().get("/person/count").then().statusCode(200);
+        given().when().get("/person/all").then().statusCode(200);
+        given().when().get("/person/phone/1111").then().statusCode(200);
+        given().when().get("/person/allpwh/Action figur").then().statusCode(200);
+        given().when().get("/person/allpic/3700").then().statusCode(200);
+        given().when().get("/hobby/").then().statusCode(200);
+        given().when().get("/hobby/all").then().statusCode(200);
+    }
+
 }
 
