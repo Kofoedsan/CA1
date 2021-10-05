@@ -11,11 +11,11 @@ public class HobbiesDTO {
 
     List<HobbyDTO> all = new ArrayList();
 
-    public HobbiesDTO(List<Hobby> hobbiEntity)
+    public HobbiesDTO(List<Hobby> hobbyEntity)
     {
-        for (Hobby p : hobbiEntity)
+        for (Hobby h : hobbyEntity)
         {
-            all.add(new HobbyDTO(p));
+            all.add(new HobbyDTO(h));
         }
     }
 

@@ -235,6 +235,18 @@ public class PersonResourceTest
                 .body("dto_id", equalTo(p2.getPerson_id()));
     }
 
+//    @Test
+//    public void getAllHobbies()
+//    {
+//        given()
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .get("/hobby/all")
+//                .then()
+//                .assertThat()
+//                .statusCode(HttpStatus.OK_200.getStatusCode())
+//                .body("all", hasSize(2));
+//    }
+
 
     @Test
     public void testEndPoints() throws Exception

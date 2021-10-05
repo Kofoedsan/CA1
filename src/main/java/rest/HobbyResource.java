@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.HobbiesDTO;
 import dtos.PersonDTO;
+import dtos.PersonsDTO;
 import facades.HobbyFacade;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,5 +48,6 @@ public class HobbyResource {
         HobbiesDTO hobbiesDTO = hobbyFacade.getAllHobbies();
         return Response.ok().entity(GSON.toJson(hobbiesDTO)).build();
     }
+
 
 }
