@@ -150,7 +150,7 @@ public class PersonResourceTest
     public void testDummyMsg() throws Exception
     {
         given()
-                .contentType("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
                 .get("/person/").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
@@ -158,10 +158,10 @@ public class PersonResourceTest
     }
 
     @Test
-    public void testCount() throws Exception
+    public void testPersonCount() throws Exception
     {
         given()
-                .contentType("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
                 .get("/person/count").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
@@ -235,17 +235,17 @@ public class PersonResourceTest
                 .body("dto_id", equalTo(p2.getPerson_id()));
     }
 
-//    @Test
-//    public void getAllHobbies()
-//    {
-//        given()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .get("/hobby/all")
-//                .then()
-//                .assertThat()
-//                .statusCode(HttpStatus.OK_200.getStatusCode())
-//                .body("all", hasSize(2));
-//    }
+    @Test
+    public void getAllHobbiesCount()
+    {
+        given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .get("/hobby/count")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("count", equalTo(450));
+    }
 
 
     @Test

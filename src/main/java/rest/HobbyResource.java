@@ -41,6 +41,16 @@ public class HobbyResource {
                     @ApiResponse(responseCode = "200", description = "All hobbies "),
                     @ApiResponse(responseCode = "400", description = "Entity not found")})
 
+    @Path("count")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonCount() {
+
+        int count = hobbyFacade.getAllHobbiesCount();
+        //System.out.println("--------------->"+count);
+        return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
+    }
+
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})

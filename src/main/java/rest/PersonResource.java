@@ -42,7 +42,7 @@ public class PersonResource {
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
+    public String getPersonCount() {
 
         long count = personFacade.getPersonCount();
         //System.out.println("--------------->"+count);

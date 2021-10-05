@@ -3,59 +3,71 @@ package facades;
 import dtos.HobbiesDTO;
 import dtos.HobbyDTO;
 import entities.Hobby;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class HobbyFacade implements IHobbyFacade {
+public class HobbyFacade implements IHobbyFacade
+{
 
     private static HobbyFacade instance;
     private static EntityManagerFactory emf;
 
-    private HobbyFacade() {}
+    private HobbyFacade()
+    {
+    }
 
-    public static HobbyFacade getHobbyFacadeMethods(EntityManagerFactory _emf) {
-        if (instance == null) {
+    public static HobbyFacade getHobbyFacadeMethods(EntityManagerFactory _emf)
+    {
+        if (instance == null)
+        {
             emf = _emf;
             instance = new HobbyFacade();
         }
         return instance;
     }
 
-    private EntityManager getEntityManager() {
+    private EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
-    public long hobbyAmount(){
-        EntityManager em = emf.createEntityManager();
-        try{
-            long hobbyCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
-            return hobbyCount;
-        }finally{
-            em.close();
-        }
-    }
 
     @Override
-    public HobbyDTO addHobby(HobbyDTO hdto) {
+    public HobbyDTO addHobby(HobbyDTO hdto)
+    {
         return null;
     }
 
-    public HobbiesDTO getAllHobbies() {
+
+    public HobbiesDTO getAllHobbies()
+    {
         EntityManager em = getEntityManager();
-        TypedQuery <Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
+        TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
         List<Hobby> hobbies = query.getResultList();
         return new HobbiesDTO(hobbies);
     }
 
+    public int getAllHobbiesCount()
+    {
+        EntityManager em = getEntityManager();
+        TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
+        List<Hobby> hobbies = query.getResultList();
+        return hobbies.size();
+
+    }
+
     @Override
-    public HobbyDTO removeHobby(int id) {
+    public HobbyDTO removeHobby(int id)
+    {
         return null;
     }
 
     @Override
-    public HobbyDTO updateHobby(HobbyDTO hdto) {
+    public HobbyDTO updateHobby(HobbyDTO hdto)
+    {
         return null;
     }
 }

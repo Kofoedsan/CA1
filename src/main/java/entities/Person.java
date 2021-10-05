@@ -6,6 +6,7 @@ import dtos.PersonDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 
@@ -123,5 +124,20 @@ public class Person implements Serializable {
                 ", address=" + address +
                 ", hobbies=" + hobbies +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(person_id, person.person_id);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 0;
     }
 }
