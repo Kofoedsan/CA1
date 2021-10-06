@@ -29,6 +29,21 @@ public class FacadeExampleTest
     private static PersonFacade facade;
     Person p1;
     Person p2;
+    Person p3;
+
+    Cityinfo city1;
+    Cityinfo city2;
+    Address address1;
+    Address address2;
+
+    Hobby h1;
+    Hobby h2;
+
+    Phone phone1;
+    Phone phone2;
+    Phone phone3;
+
+
 
     public FacadeExampleTest()
     {
@@ -85,12 +100,12 @@ public class FacadeExampleTest
         p2.setHobbies(testhobby2);
 
         List<Phone> testPhone1 = new ArrayList<>();
-        Phone phone1 = new Phone(1111, p1);
+        phone1 = new Phone(1111, p1);
         testPhone1.add(phone1);
         p1.setPhones(testPhone1);
 
         List<Phone> testPhone2 = new ArrayList<>();
-        Phone phone2 = new Phone(2222, p2);
+        phone2 = new Phone(2222, p2);
         testPhone2.add(phone2);
         p2.setPhones(testPhone2);
 
@@ -117,7 +132,7 @@ public class FacadeExampleTest
 //    }
 
     @Test
-    public void testAFacadeMethod() throws Exception
+    public void testAFacadeMethod()
     {
         assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
     }
@@ -173,9 +188,31 @@ public class FacadeExampleTest
         assertEquals(expected, actual);
     }
 
+
     @Test
-    public void getPersonException()  {
-        Exception exception = assertThrows(PersonException.class, () -> {
+    public void FailInUpdateNameException()
+    {
+        Exception exception = assertThrows(PersonException.class, () ->
+        {
+            p1.setfName("");
+            PersonDTO expected = new PersonDTO(p1);
+            PersonDTO actual = facade.updatePerson(new PersonDTO(p1));
+            assertEquals(expected,actual);
+
+        });
+        String expectedMessage = "Fejl i brugerinfo. Check navn";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+
+    @Test
+    public void getPersonException()
+    {
+        Exception exception = assertThrows(PersonException.class, () ->
+        {
             facade.getPerson(3);
         });
         String expectedMessage = "Could not find person with id: 3 because the person does not exist";
@@ -190,6 +227,5 @@ public class FacadeExampleTest
         int actual = facade.getAllPersonsByAddress("Kaldbakgade 8").getSize();
         assertEquals(expected,actual);
     }
-
 }
 
