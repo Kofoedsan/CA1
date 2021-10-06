@@ -11,14 +11,14 @@ import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
@@ -39,7 +39,8 @@ public class FacadeExampleTest
 
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown()
+    {
 //        Remove any data after each test was run
     }
 
@@ -61,7 +62,7 @@ public class FacadeExampleTest
     public void setUp()
     {
         EntityManager em = emf.createEntityManager();
-        p1 = new Person("Førstenavn1", "Sidstenavn1", "Email1");
+        p1 = new Person("Førstenavn1", "Sidstenavn1", "Ema@il1");
         Cityinfo city1 = new Cityinfo(3700, "Rønne");
         Address address1 = new Address("Kaldbakgade 8");
         address1.setCityinfo(city1);
@@ -122,7 +123,7 @@ public class FacadeExampleTest
     }
 
     @Test
-    void getPerson() throws PersonException
+    public void getPerson() throws PersonException
     {
         int expected = p1.getPerson_id();
         int actual = facade.getPerson(p1.getPerson_id()).getDto_id();
@@ -130,11 +131,65 @@ public class FacadeExampleTest
     }
 
     @Test
-    void deletePerson() throws PersonException
+    public void deletePerson() throws PersonException
     {
         int expected = p2.getPerson_id();
         int actual = facade.deletePerson(p2.getPerson_id()).getDto_id();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getAllPersons()
+    {
+        int expected = 2;
+        int actual = facade.getAllPersons().getSize();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getAllPIC() throws PersonException
+    {
+        int expected = 1;
+        int actual = facade.getAllPersonsLivingInCity(p2.getAddress().getCityinfo().getZipCode()).getSize();
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getAllpwh() throws PersonException
+    {
+        int expected = 1;
+        int actual = facade.getAllPersonsWithHobby(p2.getHobbies().get(0).getName()).getSize();
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void updatePerson() throws PersonException
+    {
+        p1.setfName("René");
+        PersonDTO expected = new PersonDTO(p1);
+        PersonDTO actual = facade.updatePerson(new PersonDTO(p1));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getPersonException()  {
+        Exception exception = assertThrows(PersonException.class, () -> {
+            facade.getPerson(3);
+        });
+        String expectedMessage = "Could not find person with id: 3 because the person does not exist";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+//    @Test
+//    public void getAllPersonsByAddress() throws PersonException
+//    {
+//        int expected = 1;
+//        int actual = facade.getAllPersonsByAddress("Kaldbakgade 8").getSize();
+//        assertEquals(expected,actual);
+//    }
+
 }
 

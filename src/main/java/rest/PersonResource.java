@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.AddressDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import errorhandling.PersonException;
@@ -117,6 +118,7 @@ public class PersonResource {
         System.out.println(persons);
         return Response.ok().entity(GSON.toJson(persons)).build();
     }
+
 
 
     @Operation(summary = "All persons in city",

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Schema(name = "PersonDTO")
@@ -152,6 +153,21 @@ public class PersonDTO{
                 ", dto_city='" + dto_city + '\'' +
                 ", dto_hobbies=" + dto_hobbies +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonDTO personDTO = (PersonDTO) o;
+        return dto_id == personDTO.dto_id && dto_zipCode == personDTO.dto_zipCode && dto_address_id == personDTO.dto_address_id && Objects.equals(dto_fName, personDTO.dto_fName) && Objects.equals(dto_lName, personDTO.dto_lName) && Objects.equals(dto_email, personDTO.dto_email) && Objects.equals(dto_phones, personDTO.dto_phones) && Objects.equals(dto_street, personDTO.dto_street) && Objects.equals(dto_city, personDTO.dto_city) && Objects.equals(dto_hobbies, personDTO.dto_hobbies);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(dto_id, dto_fName, dto_lName, dto_email, dto_phones, dto_zipCode, dto_street, dto_city, dto_hobbies, dto_address_id);
     }
 }
 

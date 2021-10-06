@@ -30,4 +30,6 @@ public class PersonsDTO {
     public int getSize() {
         return all.size() ;
     }
+
+
 }

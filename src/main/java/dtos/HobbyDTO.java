@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Schema(name = "HobbyDTO")
 public class HobbyDTO {
@@ -64,5 +65,21 @@ public class HobbyDTO {
 
     public void setDto_type(String dto_type) {
         this.dto_type = dto_type;
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HobbyDTO hobbyDTO = (HobbyDTO) o;
+        return Objects.equals(dto_name, hobbyDTO.dto_name) && Objects.equals(dto_wikiLink, hobbyDTO.dto_wikiLink) && Objects.equals(dto_category, hobbyDTO.dto_category) && Objects.equals(dto_type, hobbyDTO.dto_type);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(dto_name, dto_wikiLink, dto_category, dto_type);
     }
 }

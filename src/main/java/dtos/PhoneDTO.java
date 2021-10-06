@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Schema(name = "PhoneDTO")
@@ -64,6 +65,21 @@ public class PhoneDTO {
 
     public void setDto_person(int dto_person) {
         this.dto_person = dto_person;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneDTO phoneDTO = (PhoneDTO) o;
+        return dto_number == phoneDTO.dto_number && dto_person == phoneDTO.dto_person;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(dto_number, dto_person);
     }
 }
 
