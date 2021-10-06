@@ -183,13 +183,13 @@ public class FacadeExampleTest
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
-//    @Test
-//    public void getAllPersonsByAddress() throws PersonException
-//    {
-//        int expected = 1;
-//        int actual = facade.getAllPersonsByAddress("Kaldbakgade 8").getSize();
-//        assertEquals(expected,actual);
-//    }
+    @Test
+    public void getAllPersonsByAddress() throws PersonException
+    {
+        int expected = 1;
+        int actual = facade.getAllPersonsByAddress("Kaldbakgade 8").getSize();
+        assertEquals(expected,actual);
+    }
 
 }
 

@@ -191,4 +191,14 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(result)).build();
     }
 
+    @GET
+    @Path("street/{street}") // name=street name
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPersonByAddress(@PathParam("street") String id) throws PersonException {
+        PersonsDTO persons = personFacade.getAllPersonsByAddress(id);
+        return Response.ok().entity(GSON.toJson(persons)).build();
+    }
+
+
+
 }

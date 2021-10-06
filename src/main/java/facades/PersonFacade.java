@@ -212,7 +212,7 @@ public class PersonFacade implements IPersonFacade
         EntityManager em = getEntityManager();
 
 
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address a WHERE a.a_id = :street", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.address a WHERE a.street = :street", Person.class);
         query.setParameter("street", street);
         List<Person> result = query.getResultList();
         return new PersonsDTO(result);
