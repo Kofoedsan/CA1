@@ -206,7 +206,6 @@ public class PersonFacade implements IPersonFacade
 
     }
 
-    ////////////////////////////////////////////////////////////////////////////// VIRKER IKKE
     public PersonsDTO getAllPersonsByAddress(String street) throws PersonException
     {
         EntityManager em = getEntityManager();
@@ -217,7 +216,6 @@ public class PersonFacade implements IPersonFacade
         List<Person> result = query.getResultList();
         return new PersonsDTO(result);
     }
-    /////////////////////////////////////////////////////////////////////////////// VIRKER IKKE
 
 
     @Override

@@ -202,7 +202,6 @@ public class FacadeExampleTest
         });
         String expectedMessage = "Fejl i brugerinfo. Check navn";
         String actualMessage = exception.getMessage();
-        System.out.println(actualMessage);
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
