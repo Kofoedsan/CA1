@@ -191,6 +191,15 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(result)).build();
     }
 
+    @Operation(summary = "All persons with address",
+            tags = {"All persons with address"},
+            responses = {
+                    @ApiResponse(
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "All persons with address"),
+                    @ApiResponse(responseCode = "400", description = "Entity not found")})
+
+
     @GET
     @Path("street/{street}") // name=street name
     @Produces({MediaType.APPLICATION_JSON})

@@ -33,8 +33,8 @@ public class HobbyResource {
         return "{\"msg\":\"Hello World\"}";
     }
 
-    @Operation(summary = "All hobbies",
-            tags = {"All hobbies"},
+    @Operation(summary = "Hobby amount",
+            tags = {"Amounts of hobbies"},
             responses = {
                     @ApiResponse(
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = HobbiesDTO.class))),
@@ -50,6 +50,14 @@ public class HobbyResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
+
+    @Operation(summary = "All hobbies",
+            tags = {"All hobbies"},
+            responses = {
+                    @ApiResponse(
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = HobbiesDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "All hobbies "),
+                    @ApiResponse(responseCode = "400", description = "Entity not found")})
 
     @GET
     @Path("all")
