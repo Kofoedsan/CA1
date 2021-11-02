@@ -54,7 +54,6 @@ public class PersonFacade implements IPersonFacade
             throw new PersonException(404, "Ikke gyldig email");
         }
 
-
 //        try {
 //            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.email =:email", Person.class);
 //            query.setParameter("email",p.getDto_email());
