@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <remote.server>http://138.68.179.63/manager/text</remote.server>
+        <remote.server>https://kofoednet.systems/backend/manager/text</remote.server>
 
         <db.name>CA1</db.name>
     </properties>
