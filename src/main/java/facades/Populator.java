@@ -17,7 +17,7 @@ public class Populator {
 //        Person ps2 = new Person("Sven1", "Sven2", "Sven3");
 //        Person ps3 = new Person("Konge1", "Konge2", "Konge3");
 //
-//        Hobby h1 = new Hobby("svømning", "Svømme","2","5");
+//        Hobby h1 = new Hobby("svømdning", "Svømme","2","5");
 //        Hobby h2 = new Hobby("Fiskning", "Fiskeri","3","6");
 //        Hobby h3 = new Hobby("Fiskning2", "Fiskeri2","3","62");
 //        Hobby h4 = new Hobby("Fiskning23", "Fiskeri22","33","622");
